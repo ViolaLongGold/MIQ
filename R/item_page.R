@@ -132,7 +132,7 @@ audio_NAFC_page_with_img <- function(label,
 }
 get_answer_button <- function(bin_code,
                               width = 300, height = 75, index,
-                              img_dir = "https://media.gold-msi.org/test_materials/RAT2/img_inv"){
+                              img_dir = "https://media.gold-msi.org/test_materials/MIQ2/img_inv"){
 
   img_src <- file.path(img_dir, sprintf("%s.png", bin_code))
   #printf("get_answer_button img_src: %s", img_src)
@@ -145,7 +145,7 @@ get_answer_button <- function(bin_code,
 }
 get_answer_block<-function(bin_codes,
                            width = 300, height = 75, ncols = 2,
-                           img_dir = "https://media.gold-msi.org/test_materials/RAT2/img_inv",
+                           img_dir = "https://media.gold-msi.org/test_materials/MIQ2/img_inv",
                            ...){
   n <- length(bin_codes)
   rows <- list()
@@ -165,7 +165,7 @@ get_answer_block<-function(bin_codes,
   ret
 }
 
-RAT_item <- function(label = "",
+MIQ_item <- function(label = "",
                      pattern,
                      lures,
                      answer,
@@ -179,7 +179,7 @@ RAT_item <- function(label = "",
                      block_size = 4){
 
   page_prompt <- shiny::div(prompt)
-  #printf("RAT item_called for pattern %s", pattern)
+  #printf("MIQ item_called for pattern %s", pattern)
 
   if(!instruction_page){
     bin_codes <- rep(pattern, block_size)

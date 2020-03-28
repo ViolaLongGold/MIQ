@@ -1,7 +1,7 @@
-#' RAT languages
+#' MIQ languages
 #'
-#' Lists the languages available for RAT implementations.
+#' Lists the languages available for MIQ implementations.
 #' @export
-RAT_languages <- function() {
+MIQ_languages <- function() {
   c("EN", "DE")
 }

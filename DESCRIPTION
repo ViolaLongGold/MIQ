@@ -1,4 +1,4 @@
-Package: RAT
+Package: MIQ
 Type: Package
 Title: Musical Rhythm Ability Test
 Version: 0.1.3
@@ -8,7 +8,7 @@ Description: Implementation of a Musical Rhythm Ability Test
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Depends: 
+Depends:
     R (>= 3.3.0),
 Imports:
     psychTestRCAT (>= 1.5.0),

@@ -52,7 +52,7 @@ get_practice_page <- function(page_no, feedback, audio_dir, img_dir){
     page <- ask_repeat(prompt)
   }
   else{
-    page <- RAT_item(label = sprintf("training%s", page_no),
+    page <- MIQ_item(label = sprintf("training%s", page_no),
                      pattern = training_patterns[page_no],
                      lures = training_lures[[page_no]],
                      answer = training_answers[page_no],

@@ -1,20 +1,20 @@
-#' RAT  dictionary
+#' MIQ  dictionary
 #'
-#' The default internationalisation dictionary used by the RAT.
-#' @name RAT_dict
+#' The default internationalisation dictionary used by the MIQ.
+#' @name MIQ_dict
 #' @docType data
 NULL
 
-#' RAT item bank
+#' MIQ item bank
 #'
-#' The RAT's item bank
-#' @name RAT_item_bank
+#' The MIQ's item bank
+#' @name MIQ_item_bank
 #' @docType data
 NULL
 
-#' RAT lures bank
+#' MIQ lures bank
 #'
-#' The RAT's lures  bank
-#' @name RAT_lures_bank
+#' The MIQ's lures  bank
+#' @name MIQ_lures_bank
 #' @docType data
 NULL

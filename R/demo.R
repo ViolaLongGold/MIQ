@@ -1,6 +1,6 @@
-#' Demo RAT
+#' Demo MIQ
 #'
-#' This function launches a demo for the RAT.
+#' This function launches a demo for the MIQ.
 #'
 #' @param num_items (Integer scalar) Number of items in the test.
 #' @param take_training (Boolean scalar) Defines whether instructions and training are included.
@@ -18,14 +18,14 @@
 #' @param language The language you want to run your demo in.
 #' Possible languages include English (\code{"EN"}) and German (\code{"DE"}).
 #' The first language is selected by default
-#' @param ... Further arguments to be passed to \code{\link{RAT}()}.
+#' @param ... Further arguments to be passed to \code{\link{MIQ}()}.
 #' @export
-RAT_demo <- function(num_items = 3L,
+MIQ_demo <- function(num_items = 3L,
                      take_training = TRUE,
-                     feedback = RAT::RAT_feedback_with_score(),
+                     feedback = MIQ::MIQ_feedback_with_score(),
                      admin_password = "demo",
                      researcher_email = "longgold@gold.uc.ak",
-                     dict = RAT::RAT_dict,
+                     dict = MIQ::MIQ_dict,
                      language = "EN",
                      ...) {
   elts <- c(
@@ -33,7 +33,7 @@ RAT_demo <- function(num_items = 3L,
       body = psychTestR::i18n("WELCOME"),
       button_text = psychTestR::i18n("CONTINUE")
     ), dict = dict),
-    RAT::RAT(num_items = num_items,
+    MIQ::MIQ(num_items = num_items,
              take_training = take_training,
              feedback = feedback,
              dict = dict,

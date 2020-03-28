@@ -1,8 +1,8 @@
 library(tidyverse)
 library(psychTestR)
 library(psychTestRCAT)
-source("data_raw/RAT_dict.R")
-source("data_raw/RAT_item_bank.R")
+source("data_raw/MIQ_dict.R")
+source("data_raw/MIQ_item_bank.R")
 source("R/options.R")
 source("R/practice.R")
 source("R/instructions.R")
@@ -13,19 +13,19 @@ source("R/utils.R")
 
 #printf   <- function(...) print(sprintf(...))
 #messagef <- function(...) message(sprintf(...))
-#' RAT
+#' MIQ
 #'
-#' This function defines a RAT  module for incorporation into a
+#' This function defines a MIQ  module for incorporation into a
 #' psychTestR timeline.
-#' Use this function if you want to include the RAT in a
+#' Use this function if you want to include the MIQ in a
 #' battery of other tests, or if you want to add custom psychTestR
 #' pages to your test timeline.
-#' For demoing the RAT, consider using \code{\link{RAT_demo}()}.
-#' For a standalone implementation of the RAT,
-#' consider using \code{\link{RAT_standalone}()}.
+#' For demoing the MIQ, consider using \code{\link{MIQ_demo}()}.
+#' For a standalone implementation of the MIQ,
+#' consider using \code{\link{MIQ_standalone}()}.
 #' @param num_items (Integer scalar) Number of items in the test.
 #' @param take_training (Logical scalar) Whether to include the training phase.
-#' @param label (Character scalar) Label to give the RAT results in the output file.
+#' @param label (Character scalar) Label to give the MIQ results in the output file.
 #' @param feedback (Function) Defines the feedback to give the participant
 #' at the end of the test.
 #' @param next_item.criterion (Character scalar)
@@ -62,21 +62,21 @@ source("R/utils.R")
 #' We recommend leaving this option disabled.
 #' @param dict The psychTestR dictionary used for internationalisation.
 #' @export
-RAT <- function(num_items = 15L,
+MIQ <- function(num_items = 15L,
                 take_training = FALSE,
                 with_welcome = TRUE,
-                label = "RAT",
-                feedback = RAT_feedback_with_score(),
+                label = "MIQ",
+                feedback = MIQ_feedback_with_score(),
                 next_item.criterion = "bOpt",
                 next_item.estimator = "BM",
                 next_item.prior_dist = "norm",
                 next_item.prior_par = c(0, 1),
                 final_ability.estimator = "WL",
                 constrain_answers = FALSE,
-                dict = RAT::RAT_dict) {
-  audio_dir = "https://media.gold-msi.org/test_materials/RAT2/audio"
-  training_dir = "https://media.gold-msi.org/test_materials/RAT2/audio"
-  img_dir = "https://media.gold-msi.org/test_materials/RAT2/img_inv"
+                dict = MIQ::MIQ_dict) {
+  audio_dir = "https://media.gold-msi.org/test_materials/MIQ2/audio"
+  training_dir = "https://media.gold-msi.org/test_materials/MIQ2/audio"
+  img_dir = "https://media.gold-msi.org/test_materials/MIQ2/img_inv"
   stopifnot(purrr::is_scalar_character(label),
             purrr::is_scalar_integer(num_items) || purrr::is_scalar_double(num_items),
             purrr::is_scalar_logical(take_training),
