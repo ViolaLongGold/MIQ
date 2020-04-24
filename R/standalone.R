@@ -1,7 +1,8 @@
-source("R/MIQ.R")
+library(shiny)
+library(tidyverse)
+
 options(shiny.error = browser)
 debug_locally <- !grepl("shiny-server", getwd())
-#MIQ_study_id <- 25
 
 
 #' Standalone MIQ
@@ -12,6 +13,8 @@ debug_locally <- !grepl("shiny-server", getwd())
 #' @param num_items (Scalar integer) Number of items to be adminstered.
 #' @param with_feedback (Scalar boolean) Indicates if performance feedback will be given at the end of the test. Defaults to  FALSE
 #' @param take_training (Boolean scalar) Defines whether instructions and training are included.
+#' Defaults to TRUE.
+#' @param with_welcome (Logical scalar) Whether to display a welcome page.
 #' Defaults to TRUE.
 #' @param admin_password (Scalar character) Password for accessing the admin panel.
 #' @param researcher_email (Scalar character)
@@ -65,6 +68,7 @@ MIQ_standalone  <- function(title = NULL,
         psychTestR::i18n("CLOSE_BROWSER"))
       ), dict = dict)
   )
+  key = NULL
   if(is.null(title)){
     #extract title as named vector from dictionary
     title <-

@@ -1,4 +1,4 @@
-# Rhythm Ability Test (MIQ)
+# My IQ Test (MIQ)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1415363.svg)](https://doi.org/10.5281/zenodo.1415363)
 

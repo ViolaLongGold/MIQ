@@ -10,6 +10,12 @@ NULL
 #' @importFrom dplyr "pull"
 NULL
 
+#' @importFrom methods "is"
+NULL
+
+#' @importFrom stats "dnorm"
+NULL
+
 #' @importFrom tibble "tibble"
 NULL
 
@@ -20,7 +26,4 @@ NULL
 NULL
 
 #' @importFrom purrr "is_scalar_character"
-NULL
-
-#' @importFrom methods "is"
 NULL

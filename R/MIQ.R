@@ -1,18 +1,3 @@
-library(tidyverse)
-library(psychTestR)
-library(psychTestRCAT)
-source("data_raw/MIQ_dict.R")
-source("data_raw/MIQ_item_bank.R")
-source("R/options.R")
-source("R/practice.R")
-source("R/instructions.R")
-source("R/main_test.R")
-source("R/item_page.R")
-source("R/feedback.R")
-source("R/utils.R")
-
-#printf   <- function(...) print(sprintf(...))
-#messagef <- function(...) message(sprintf(...))
 #' MIQ
 #'
 #' This function defines a MIQ  module for incorporation into a
@@ -25,6 +10,9 @@ source("R/utils.R")
 #' consider using \code{\link{MIQ_standalone}()}.
 #' @param num_items (Integer scalar) Number of items in the test.
 #' @param take_training (Logical scalar) Whether to include the training phase.
+#' Defaults to FALSE.
+#' @param with_welcome (Logical scalar) Whether to display a welcome page.
+#' Defaults to FALSE.
 #' @param label (Character scalar) Label to give the MIQ results in the output file.
 #' @param feedback (Function) Defines the feedback to give the participant
 #' at the end of the test.
@@ -64,7 +52,7 @@ source("R/utils.R")
 #' @export
 MIQ <- function(num_items = 15L,
                 take_training = FALSE,
-                with_welcome = TRUE,
+                with_welcome = FALSE,
                 label = "MIQ",
                 feedback = MIQ_feedback_with_score(),
                 next_item.criterion = "bOpt",
