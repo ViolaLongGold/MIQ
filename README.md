@@ -1,6 +1,6 @@
 # My IQ Test (MIQ)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1415363.svg)](https://doi.org/10.5281/zenodo.1415363)
+[![Travis build status](https://travis-ci.org/fmhoeger/MIQ.svg?branch=master)](https://travis-ci.org/fmhoeger/MIQ)
 
 The MIQ is an adaptive test for rhythmic pattern recognition.
 
