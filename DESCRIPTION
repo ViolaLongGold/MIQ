@@ -26,5 +26,5 @@ Suggests:
     devtools,
     ggplot2,
     plotly
-Remotes: fmhoeger/psychTestR
+Remotes: fmhoeger/psychTestR, fmhoeger/psychTestRCAT
 RoxygenNote: 7.1.0

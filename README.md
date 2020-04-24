@@ -32,7 +32,7 @@ x$packages[x$packages$package %in% c("MIQ", "psychTestR", "psychTestRCAT"), ]
 
 4. Install the MIQ:
 
-`devtools::install_github('klausfrieler/MIQ')`
+`devtools::install_github('fmhoeger/MIQ')`
 
 ## Usage
 
