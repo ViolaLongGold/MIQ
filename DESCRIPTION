@@ -1,6 +1,6 @@
-Package: MIQ
+Package: miq
 Type: Package
-Title: My IQ Test
+Title: My IQ Test (MIQ)
 Version: 0.99.0
 Author: Klaus Frieler, Frank Höger
 Maintainer: Klaus Frieler <kf@omniversum.de>

@@ -46,7 +46,7 @@ MIQ_demo <- function(num_items = 3L,
 
   psychTestR::make_test(
     elts,
-    opt = psychTestR::test_options(title = "Musical Rhythm Test Demo",
+    opt = psychTestR::test_options(title = "My IQ Test Demo",
                                    admin_password = admin_password,
                                    researcher_email = researcher_email,
                                    demo = TRUE,
