@@ -30,7 +30,7 @@ MIQ_demo <- function(num_items = 3L,
                      ...) {
   elts <- c(
     psychTestR::new_timeline(psychTestR::one_button_page(
-      body = psychTestR::i18n("WELCOME"),
+      body = psychTestR::i18n("INTRO1"),
       button_text = psychTestR::i18n("CONTINUE")
     ), dict = dict),
     MIQ::MIQ(num_items = num_items,

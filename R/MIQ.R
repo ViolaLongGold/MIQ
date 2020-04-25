@@ -62,37 +62,32 @@ MIQ <- function(num_items = 15L,
                 final_ability.estimator = "WL",
                 constrain_answers = FALSE,
                 dict = MIQ::MIQ_dict) {
-  audio_dir = "https://media.gold-msi.org/test_materials/MIQ2/audio"
-  training_dir = "https://media.gold-msi.org/test_materials/MIQ2/audio"
+  training_dir = "https://media.gold-msi.org/test_materials/MIQ2/img_inv"
   img_dir = "https://media.gold-msi.org/test_materials/MIQ2/img_inv"
   stopifnot(purrr::is_scalar_character(label),
             purrr::is_scalar_integer(num_items) || purrr::is_scalar_double(num_items),
             purrr::is_scalar_logical(take_training),
-            purrr::is_scalar_character(audio_dir),
             purrr::is_scalar_character(training_dir),
             psychTestR::is.timeline(feedback) ||
               is.list(feedback) ||
               psychTestR::is.test_element(feedback) ||
               is.null(feedback))
-  audio_dir <- gsub("/$", "", audio_dir)
   training_dir <- gsub("/$", "", training_dir)
   img_dir <- gsub("/$", "", img_dir)
 
   #psychTestR::new_timeline({
     psychTestR::join(
-      if (with_welcome) psychTestR::new_timeline(
-        psychTestR::one_button_page(
-        body = shiny::div(
-          shiny::h4(psychTestR::i18n("WELCOME"), style = "text-align:center"),
-          shiny::p(psychTestR::i18n("INTRO"),
-                   style = "margin-left:20%;margin-right:20%;text-align:justify")
-         ),
-         button_text = psychTestR::i18n("CONTINUE")
-        ), dict = dict),
+      # if (with_welcome) psychTestR::new_timeline(
+      #   psychTestR::one_button_page(
+      #   body = shiny::div(
+      #     shiny::h4(psychTestR::i18n("INTRO1"), style = "text-align:center"),
+      #    ),
+      #    button_text = psychTestR::i18n("CONTINUE")
+      #   ), dict = dict),
 
-      if (take_training) psychTestR::new_timeline(instructions(audio_dir, img_dir), dict = dict),
+      if (take_training) psychTestR::new_timeline(instructions(img_dir), dict = dict),
       psychTestR::new_timeline(
-        main_test(label = label, audio_dir = audio_dir, img_dir = img_dir, num_items = num_items,
+        main_test(label = label, img_dir = img_dir, num_items = num_items,
                   next_item.criterion = next_item.criterion,
                   next_item.estimator = next_item.estimator,
                   next_item.prior_dist = next_item.prior_dist,

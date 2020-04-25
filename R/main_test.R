@@ -10,7 +10,7 @@ get_lures <- function(item_id){
   stop(printf("Invalid item id %s", item_id))
 }
 
-main_test <- function(label, audio_dir, img_dir, num_items,
+main_test <- function(label, img_dir, num_items,
                       next_item.criterion,
                       next_item.estimator,
                       next_item.prior_dist = next_item.prior_dist,
@@ -22,7 +22,7 @@ main_test <- function(label, audio_dir, img_dir, num_items,
   psychTestRCAT::adapt_test(
     label = label,
     item_bank = item_bank,
-    show_item = show_item(audio_dir, img_dir),
+    show_item = show_item(img_dir),
     stopping_rule = psychTestRCAT::stopping_rule.num_items(n = num_items),
     opt = MIQ_options(next_item.criterion = next_item.criterion,
                       next_item.estimator = next_item.estimator,
@@ -35,7 +35,7 @@ main_test <- function(label, audio_dir, img_dir, num_items,
   )
 }
 
-show_item <- function(audio_dir, img_dir) {
+show_item <- function(img_dir) {
   function(item, ...) {
     stopifnot(is(item, "item"), nrow(item) == 1L)
     item_number <- psychTestRCAT::get_item_number(item)
@@ -48,7 +48,6 @@ show_item <- function(audio_dir, img_dir) {
       answer = item$answer,
       prompt = get_prompt(item_number, num_items_in_test),
       img_dir = img_dir,
-      audio_dir = audio_dir,
       save_answer = TRUE,
       get_answer = NULL,
       on_complete = NULL,

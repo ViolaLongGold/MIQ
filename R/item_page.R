@@ -1,4 +1,3 @@
-
 trigger_img_button <- function (inputId, img_src, width, height, margin = height/10){
   inputId <- htmltools::htmlEscape(inputId, attribute = TRUE)
   style <- sprintf("width: %dpx; height: %dpx; margin: %dpx; background: url('%s'); background-size: %dpx %dpx; background-position: center center;", width, height, round(margin),
@@ -100,32 +99,30 @@ get_audio_element <- function(url,
   audio
 }
 
-audio_NAFC_page_with_img <- function(label,
-                                     prompt,
-                                     choices,
-                                     audio_url,
-                                     save_answer = TRUE,
-                                     get_answer = NULL,
-                                     hide_response_ui = TRUE,
-                                     response_ui_id = "response_ui",
-                                     on_complete = NULL,
-                                     admin_ui = NULL) {
+NAFC_page_with_img <- function(label,
+                               prompt,
+                               subprompt,
+                               choices,
+                               save_answer = TRUE,
+                               get_answer = NULL,
+                               hide_response_ui = TRUE,
+                               response_ui_id = "response_ui",
+                               on_complete = NULL,
+                               admin_ui = NULL) {
   stopifnot(purrr::is_scalar_character(label))
-  #audio_ui <- get_audio_ui(audio_url, wait = T, loop = F)
-  audio_ui <- get_audio_ui(audio_url, wait = T, loop = F)
-  #audio_ui <- get_audio_element(audio_url, autoplay = T, wait = T, width = 50)
+  audio_ui <- get_audio_ui("audio_url", wait = T, loop = F)
   style <- NULL
   if(hide_response_ui) style <- "visibility:hidden"
   ui <- shiny::div(
-    tagify(prompt),
-    audio_ui,
+    shiny::div(prompt, style = "font-weight: bold;"),
+    tagify(subprompt),
     shiny::div(choices, style = style, id = response_ui_id)
     )
   if(is.null(get_answer)){
     get_answer <- function(input, ...) as.numeric(gsub("answer", "", input$last_btn_pressed))
   }
   validate <- function(answer, ...) !is.null(answer)
-  #printf("[audio_NAFC_page_with_img] left")
+  #printf("[NAFC_page_with_img] left")
   psychTestR::page(ui = ui, label = label,  get_answer = get_answer, save_answer = save_answer,
        validate = validate, on_complete = on_complete, final = FALSE,
        admin_ui = admin_ui)
@@ -170,29 +167,30 @@ MIQ_item <- function(label = "",
                      lures,
                      answer,
                      prompt = "",
+                     subprompt = "",
                      img_dir = "",
-                     audio_dir = "",
                      save_answer = TRUE,
                      get_answer = NULL,
                      on_complete = NULL,
                      instruction_page = FALSE,
-                     block_size = 4){
+                     block_size = 4) {
 
   page_prompt <- shiny::div(prompt)
+  page_subprompt <- shiny::div(subprompt)
   #printf("MIQ item_called for pattern %s", pattern)
 
   if(!instruction_page){
     bin_codes <- rep(pattern, block_size)
     bin_codes[setdiff(1:block_size, answer)] <- lures
     choices <- get_answer_block(bin_codes, img_dir = img_dir)
-    audio_url <- file.path(audio_dir, sprintf("%s.mp3", pattern))
-    audio_NAFC_page_with_img(label = label,
-                             prompt = page_prompt,
-                             audio_url = audio_url,
-                             choices = choices,
-                             save_answer = save_answer,
-                             get_answer = get_answer,
-                             on_complete = on_complete)
+
+    NAFC_page_with_img(label = label,
+                       prompt = page_prompt,
+                       subprompt = page_subprompt,
+                       choices = choices,
+                       save_answer = save_answer,
+                       get_answer = get_answer,
+                       on_complete = on_complete)
   }
   else{
     #print("Instruction page hand")
