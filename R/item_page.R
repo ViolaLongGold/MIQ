@@ -1,7 +1,6 @@
-trigger_img_button <- function (inputId, img_src, width, height, margin = height/10){
+trigger_img_button <- function (inputId, img_src, width, height, margin = height / 10){
   inputId <- htmltools::htmlEscape(inputId, attribute = TRUE)
-  style <- sprintf("width: %dpx; height: %dpx; margin: %dpx; background: url('%s'); background-size: %dpx %dpx; background-position: center center;", width, height, round(margin),
-                   img_src, width, height)
+  style <- sprintf("width: %dpx; height: %dpx; margin: %dpx; background: url('%s'); background-size: %dpx %dpx; background-position: center center;", width, height, 4, img_src, width, height)
   shiny::actionButton(inputId = inputId,
                       label = "",
                       style = style,
@@ -47,7 +46,6 @@ get_audio_ui <- function(url,
                          width = 0,
                          wait = TRUE,
                          loop = FALSE) {
-  #print(url)
   stopifnot(purrr::is_scalar_character(url),
             purrr::is_scalar_character(type),
             purrr::is_scalar_logical(wait),
@@ -77,7 +75,6 @@ get_audio_element <- function(url,
                               width = 200,
                               height = 50,
                               id = "media") {
-  #print(url)
   stopifnot(purrr::is_scalar_character(url),
             purrr::is_scalar_character(type)
             )
@@ -102,73 +99,79 @@ get_audio_element <- function(url,
 NAFC_page_with_img <- function(label,
                                prompt,
                                subprompt,
+                               page_number,
+                               image_dir,
                                choices,
                                save_answer = TRUE,
                                get_answer = NULL,
-                               hide_response_ui = TRUE,
+                               hide_response_ui = FALSE,
                                response_ui_id = "response_ui",
                                on_complete = NULL,
                                admin_ui = NULL) {
   stopifnot(purrr::is_scalar_character(label))
   audio_ui <- get_audio_ui("audio_url", wait = T, loop = F)
   style <- NULL
-  if(hide_response_ui) style <- "visibility:hidden"
+  if (hide_response_ui) style <- "visibility:hidden"
   ui <- shiny::div(
     shiny::div(prompt, style = "font-weight: bold;"),
     tagify(subprompt),
+    shiny::tags$img(src = paste0(image_dir, sprintf("/x%d/m_x%d.png", page_number, page_number))),
     shiny::div(choices, style = style, id = response_ui_id)
     )
-  if(is.null(get_answer)){
+  if (is.null(get_answer)) {
     get_answer <- function(input, ...) as.numeric(gsub("answer", "", input$last_btn_pressed))
   }
   validate <- function(answer, ...) !is.null(answer)
-  #printf("[NAFC_page_with_img] left")
-  psychTestR::page(ui = ui, label = label,  get_answer = get_answer, save_answer = save_answer,
+  psychTestR::page(ui = ui, label = label, get_answer = get_answer, save_answer = save_answer,
        validate = validate, on_complete = on_complete, final = FALSE,
        admin_ui = admin_ui)
 }
-get_answer_button <- function(bin_code,
-                              width = 300, height = 75, index,
-                              img_dir = "https://media.gold-msi.org/test_materials/MIQ2/img_inv"){
 
-  img_src <- file.path(img_dir, sprintf("%s.png", bin_code))
-  #printf("get_answer_button img_src: %s", img_src)
-  img_button <- trigger_img_button(inputId = sprintf("answer%d", index),
-                                   width = width,
-                                   height = height,
-                                   margin = height/10,
-                                   img_src = img_src)
-  img_button
+get_answer_button <- function(page_number,
+                              image_number,
+                              image_dir,
+                              width = 130,
+                              height = 91,
+                              index){
+
+  img_src <- file.path(image_dir, sprintf("/x%d/r%d_x%d.png", page_number, image_number, page_number))
+  # printf("get_answer_button img_src: %s", img_src)
+  trigger_img_button(inputId = sprintf("answer%d", index),
+                     img_src = img_src,
+                     width = width,
+                     height = height,
+                     margin = height / 10)
 }
-get_answer_block<-function(bin_codes,
-                           width = 300, height = 75, ncols = 2,
-                           img_dir = "https://media.gold-msi.org/test_materials/MIQ2/img_inv",
-                           ...){
-  n <- length(bin_codes)
+
+get_answer_block<-function(page_number,
+                           image_numbers,
+                           image_dir,
+                           width = 550,
+                           height = 100,
+                           ncols = 4,
+                           ...) {
+  n <- length(image_numbers)
   rows <- list()
-  for(i in seq_len(n)){
-    width_factor <- nchar(bin_codes[i])/8
-    button <- get_answer_button(bin_codes[i], width = width * width_factor, height = height,
-                                index = i, img_dir = img_dir)
-      rows[[i]] <- button
+  for (i in seq_len(n)) {
+    #width_factor <- nchar(image_numbers[i]) / 8
+    button <- get_answer_button(page_number, image_numbers[i], width = 130, height = 91, index = i, image_dir = image_dir)
+    rows[[i]] <- button
   }
 
   ret <- list()
-  nrows <- floor(n/ncols)
-  for(i in seq_len(nrows)){
-    ret[[i]] <- shiny::div(rows[(i-1) * ncols + (1:ncols)])
+  nrows <- floor(n / ncols)
+  for (i in seq_len(nrows)) {
+    ret[[i]] <- shiny::div(rows[(i - 1) * ncols + (1:ncols)])
   }
-  #shiny::div(ret, ...)
   ret
 }
 
-MIQ_item <- function(label = "",
-                     pattern,
-                     lures,
+MIQ_item <- function(label,
+                     page_number,
                      answer,
                      prompt = "",
                      subprompt = "",
-                     img_dir = "",
+                     image_dir = "",
                      save_answer = TRUE,
                      get_answer = NULL,
                      on_complete = NULL,
@@ -177,23 +180,24 @@ MIQ_item <- function(label = "",
 
   page_prompt <- shiny::div(prompt)
   page_subprompt <- shiny::div(subprompt)
-  #printf("MIQ item_called for pattern %s", pattern)
+  # printf("MIQ item_called for page_number %f", page_number)
+
+  image_numbers <- c(1, 2, 3, 4, 5, 6, 7, 8)
 
   if(!instruction_page){
-    bin_codes <- rep(pattern, block_size)
-    bin_codes[setdiff(1:block_size, answer)] <- lures
-    choices <- get_answer_block(bin_codes, img_dir = img_dir)
+    choices <- get_answer_block(page_number, image_numbers, image_dir = image_dir)
 
     NAFC_page_with_img(label = label,
                        prompt = page_prompt,
                        subprompt = page_subprompt,
+                       page_number = page_number,
+                       image_dir = image_dir,
                        choices = choices,
                        save_answer = save_answer,
                        get_answer = get_answer,
                        on_complete = on_complete)
   }
   else{
-    #print("Instruction page hand")
     psychTestR::one_button_page(page_prompt, button_text = "add stuff")
   }
 }

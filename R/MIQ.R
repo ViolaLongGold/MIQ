@@ -62,40 +62,28 @@ MIQ <- function(num_items = 15L,
                 final_ability.estimator = "WL",
                 constrain_answers = FALSE,
                 dict = MIQ::MIQ_dict) {
-  training_dir = "https://media.gold-msi.org/test_materials/MIQ2/img_inv"
-  img_dir = "https://media.gold-msi.org/test_materials/MIQ2/img_inv"
+
   stopifnot(purrr::is_scalar_character(label),
             purrr::is_scalar_integer(num_items) || purrr::is_scalar_double(num_items),
             purrr::is_scalar_logical(take_training),
-            purrr::is_scalar_character(training_dir),
             psychTestR::is.timeline(feedback) ||
               is.list(feedback) ||
               psychTestR::is.test_element(feedback) ||
               is.null(feedback))
-  training_dir <- gsub("/$", "", training_dir)
-  img_dir <- gsub("/$", "", img_dir)
 
-  #psychTestR::new_timeline({
-    psychTestR::join(
-      # if (with_welcome) psychTestR::new_timeline(
-      #   psychTestR::one_button_page(
-      #   body = shiny::div(
-      #     shiny::h4(psychTestR::i18n("INTRO1"), style = "text-align:center"),
-      #    ),
-      #    button_text = psychTestR::i18n("CONTINUE")
-      #   ), dict = dict),
+  image_dir <- "http://52.17.155.167/concerto4/media/stimuli/MyIQ_v1"
 
-      if (take_training) psychTestR::new_timeline(instructions(img_dir), dict = dict),
-      psychTestR::new_timeline(
-        main_test(label = label, img_dir = img_dir, num_items = num_items,
-                  next_item.criterion = next_item.criterion,
-                  next_item.estimator = next_item.estimator,
-                  next_item.prior_dist = next_item.prior_dist,
-                  next_item.prior_par = next_item.prior_par,
-                  final_ability.estimator = final_ability.estimator,
-                  constrain_answers = constrain_answers),
-        dict = dict),
-      feedback
-    )#},
-    #dict = dict)
+  psychTestR::join(
+    if (take_training) psychTestR::new_timeline(instructions(image_dir), dict = dict),
+    psychTestR::new_timeline(
+      main_test(label = label, image_dir = image_dir, num_items = num_items,
+                next_item.criterion = next_item.criterion,
+                next_item.estimator = next_item.estimator,
+                next_item.prior_dist = next_item.prior_dist,
+                next_item.prior_par = next_item.prior_par,
+                final_ability.estimator = final_ability.estimator,
+                constrain_answers = constrain_answers),
+      dict = dict),
+    feedback
+  )
 }

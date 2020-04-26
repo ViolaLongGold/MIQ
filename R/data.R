@@ -11,10 +11,3 @@ NULL
 #' @name MIQ_item_bank
 #' @docType data
 NULL
-
-#' MIQ lures bank
-#'
-#' The MIQ's lures  bank
-#' @name MIQ_lures_bank
-#' @docType data
-NULL
