@@ -109,11 +109,14 @@ feedback_page_with_img <- function(label,
                                    admin_ui = NULL) {
   stopifnot(purrr::is_scalar_character(label))
   get_answer = function(state, ...) psychTestR::get_local("correct_answer", state)
+  item_name <- paste0("x", page_number)
+  button_text_key <- if (page_number == 1) { "NEXT_PRACTICE_ITEM" } else { "CONTINUE_TO_MAIN" }
+
   ui <- shiny::div(
     shiny::div(prompt, style = "font-weight: bold;"),
-    shiny::tags$img(src = paste0(image_dir, sprintf("/x%d/m_x%d.png", page_number, page_number))),
-    shiny::tags$img(src = paste0(image_dir, sprintf("/x%d/r%d_x%d.png", page_number, correct_answer_number, page_number)), style = "margin-bottom: 15px; margin-top: 10px;"),
-    shiny::p(psychTestR::trigger_button("next", psychTestR::i18n("CONTINUE")))
+    shiny::tags$img(src = paste0(image_dir, sprintf("/%s/m_%s.png", item_name, item_name))),
+    shiny::tags$img(src = paste0(image_dir, sprintf("/%s/r%d_%s.png", item_name, correct_answer_number, item_name)), style = "margin-bottom: 15px; margin-top: 10px;"),
+    shiny::p(psychTestR::trigger_button("next", psychTestR::i18n(button_text_key)))
   )
 
   psychTestR::page(ui = ui, label = label, get_answer = get_answer, save_answer = save_answer,
@@ -210,7 +213,7 @@ MIQ_item <- function(label,
 
   page_prompt <- shiny::div(prompt)
   page_subprompt <- shiny::div(subprompt)
-  printf("MIQ item_called for page_number %f and item_name %s", page_number, item_name)
+  printf("MIQ item_called for page_number %d and item_name %s", page_number, item_name)
 
   image_numbers <- c(1, 2, 3, 4, 5, 6, 7, 8)
 
