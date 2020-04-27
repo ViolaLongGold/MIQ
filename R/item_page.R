@@ -96,10 +96,37 @@ get_audio_element <- function(url,
   audio
 }
 
+feedback_page_with_img <- function(label,
+                                   prompt,
+                                   page_number,
+                                   correct_answer_number,
+                                   image_dir,
+                                   save_answer = TRUE,
+                                   get_answer = NULL,
+                                   hide_response_ui = FALSE,
+                                   response_ui_id = "response_ui",
+                                   on_complete = NULL,
+                                   admin_ui = NULL) {
+  stopifnot(purrr::is_scalar_character(label))
+  get_answer = function(state, ...) psychTestR::get_local("correct_answer", state)
+  ui <- shiny::div(
+    shiny::div(prompt, style = "font-weight: bold;"),
+    shiny::tags$img(src = paste0(image_dir, sprintf("/x%d/m_x%d.png", page_number, page_number))),
+    shiny::tags$img(src = paste0(image_dir, sprintf("/x%d/r%d_x%d.png", page_number, correct_answer_number, page_number)), style = "margin-bottom: 15px; margin-top: 10px;"),
+    shiny::p(psychTestR::trigger_button("next", psychTestR::i18n("CONTINUE")))
+  )
+
+  psychTestR::page(ui = ui, label = label, get_answer = get_answer, save_answer = save_answer,
+       on_complete = on_complete, final = FALSE,
+       admin_ui = admin_ui)
+}
+
+
 NAFC_page_with_img <- function(label,
                                prompt,
                                subprompt,
                                page_number,
+                               item_name,
                                image_dir,
                                choices,
                                save_answer = TRUE,
@@ -115,7 +142,7 @@ NAFC_page_with_img <- function(label,
   ui <- shiny::div(
     shiny::div(prompt, style = "font-weight: bold;"),
     tagify(subprompt),
-    shiny::tags$img(src = paste0(image_dir, sprintf("/x%d/m_x%d.png", page_number, page_number))),
+    shiny::tags$img(src = paste0(image_dir, sprintf("/%s/m_%s.png", item_name, item_name))),
     shiny::div(choices, style = style, id = response_ui_id)
     )
   if (is.null(get_answer)) {
@@ -128,13 +155,14 @@ NAFC_page_with_img <- function(label,
 }
 
 get_answer_button <- function(page_number,
+                              item_name,
                               image_number,
                               image_dir,
                               width = 130,
                               height = 91,
                               index){
 
-  img_src <- file.path(image_dir, sprintf("/x%d/r%d_x%d.png", page_number, image_number, page_number))
+  img_src <- file.path(image_dir, sprintf("/%s/r%d_%s.png", item_name, image_number, item_name))
   # printf("get_answer_button img_src: %s", img_src)
   trigger_img_button(inputId = sprintf("answer%d", index),
                      img_src = img_src,
@@ -144,6 +172,7 @@ get_answer_button <- function(page_number,
 }
 
 get_answer_block<-function(page_number,
+                           item_name,
                            image_numbers,
                            image_dir,
                            width = 550,
@@ -154,7 +183,7 @@ get_answer_block<-function(page_number,
   rows <- list()
   for (i in seq_len(n)) {
     #width_factor <- nchar(image_numbers[i]) / 8
-    button <- get_answer_button(page_number, image_numbers[i], width = 130, height = 91, index = i, image_dir = image_dir)
+    button <- get_answer_button(page_number, item_name, image_numbers[i], width = 130, height = 91, index = i, image_dir = image_dir)
     rows[[i]] <- button
   }
 
@@ -168,6 +197,7 @@ get_answer_block<-function(page_number,
 
 MIQ_item <- function(label,
                      page_number,
+                     item_name,
                      answer,
                      prompt = "",
                      subprompt = "",
@@ -180,24 +210,26 @@ MIQ_item <- function(label,
 
   page_prompt <- shiny::div(prompt)
   page_subprompt <- shiny::div(subprompt)
-  # printf("MIQ item_called for page_number %f", page_number)
+  printf("MIQ item_called for page_number %f and item_name %s", page_number, item_name)
 
   image_numbers <- c(1, 2, 3, 4, 5, 6, 7, 8)
 
   if(!instruction_page){
-    choices <- get_answer_block(page_number, image_numbers, image_dir = image_dir)
+    choices <- get_answer_block(page_number, item_name, image_numbers, image_dir = image_dir)
 
     NAFC_page_with_img(label = label,
                        prompt = page_prompt,
                        subprompt = page_subprompt,
                        page_number = page_number,
+                       item_name = item_name,
                        image_dir = image_dir,
                        choices = choices,
                        save_answer = save_answer,
                        get_answer = get_answer,
-                       on_complete = on_complete)
-  }
-  else{
+                       on_complete = function(answer, state, ...) {
+                         set_local("correct_answer", answer, state)
+                       })
+  } else {
     psychTestR::one_button_page(page_prompt, button_text = "add stuff")
   }
 }

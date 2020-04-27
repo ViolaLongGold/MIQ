@@ -30,10 +30,12 @@ show_item <- function(image_dir) {
 
     item_number <- psychTestRCAT::get_item_number(item)
     num_items_in_test <- psychTestRCAT::get_num_items_in_test(item)
+    item_bank <- MIQ::MIQ_item_bank
 
     MIQ_item(
       label = paste0("q", item_number),
-      #page_number = page_number,
+      page_number = item_number,
+      item_name = item_bank[item_bank$id == item_number, "name"],
       answer = item$answer,
       prompt = get_prompt(item_number, num_items_in_test),
       image_dir = image_dir,

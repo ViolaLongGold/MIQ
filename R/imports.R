@@ -19,6 +19,12 @@ NULL
 #' @importFrom tibble "tibble"
 NULL
 
+#' @importFrom psychTestR "get_local"
+NULL
+
+#' @importFrom psychTestR "set_local"
+NULL
+
 #' @importFrom purrr "is_scalar_double"
 NULL
 

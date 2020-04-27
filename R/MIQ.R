@@ -76,7 +76,9 @@ MIQ <- function(num_items = 15L,
   psychTestR::join(
     if (take_training) psychTestR::new_timeline(instructions(image_dir), dict = dict),
     psychTestR::new_timeline(
-      main_test(label = label, image_dir = image_dir, num_items = num_items,
+      main_test(label = label,
+                image_dir = image_dir,
+                num_items = num_items,
                 next_item.criterion = next_item.criterion,
                 next_item.estimator = next_item.estimator,
                 next_item.prior_dist = next_item.prior_dist,

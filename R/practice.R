@@ -1,4 +1,4 @@
-training_answers  <- c(3, 1, 4, -1)
+training_answers  <- c(8, 3)
 
 ask_repeat <- function(prompt) {
   psychTestR::NAFC_page(
@@ -14,17 +14,28 @@ ask_repeat <- function(prompt) {
   )
 }
 
-make_practice_page <-  function(page_number, image_dir) {
+practice_feedback_page <-  function(page_number, correct_answer_number, image_dir) {
+  # if (page_number > 1 &&  answer == training_answers[page_number - 1]) correct <- "CORRECT"
+  #   feedback <- psychTestR::i18n(correct)
+  conditional(function(state, ...) get_local("correct_answer", state) == training_answers[page_number],
+    feedback_page_with_img(sprintf("training%d", page_number), paste(psychTestR::i18n(sprintf("PRACTICE_FEEDBACK%d", page_number), html = TRUE), "Correct!"), page_number, correct_answer_number, image_dir)
+  )
+  conditional(function(state, ...) get_local("correct_answer", state) != training_answers[page_number],
+    feedback_page_with_img(sprintf("training%d", page_number), paste(psychTestR::i18n(sprintf("PRACTICE_FEEDBACK%d", page_number), html = TRUE), "Incorrect!"), page_number, correct_answer_number, image_dir)
+  )
+}
+
+practice_page <-  function(page_number, image_dir) {
   psychTestR::reactive_page(function(answer, ...) {
-    printf("[make_practice_page] Answer: %s, page_number: %d, correct: %d", answer, page_number, training_answers[page_number])
+    printf("[practice_page] Answer: %s, page_number: %d, correct: %d", answer, page_number, training_answers[page_number])
     correct <- "INCORRECT"
+    printf("answer: %d", answer)
+    print(training_answers[page_number - 1])
     if (page_number > 1 &&  answer == training_answers[page_number - 1]) correct <- "CORRECT"
     feedback <- psychTestR::i18n(correct)
     get_practice_page(page_number, feedback, image_dir)
   })
 }
-
-
 
 get_practice_page <- function(page_number, feedback, image_dir){
   key <- sprintf("PRACTICE%d", page_number)
@@ -34,6 +45,7 @@ get_practice_page <- function(page_number, feedback, image_dir){
 
   MIQ_item(label = sprintf("training%s", page_number),
            page_number = page_number,
+           item_name = paste0("x", page_number),
            answer = training_answers[page_number],
            prompt = prompt,
            subprompt = subprompt,
@@ -43,5 +55,5 @@ get_practice_page <- function(page_number, feedback, image_dir){
 }
 
 practice <- function(image_dir) {
-  lapply(1:2, make_practice_page, image_dir) %>% unlist()
+  lapply(1:2, practice_page, image_dir) %>% unlist()
 }
