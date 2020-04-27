@@ -15,10 +15,8 @@ ask_repeat <- function(prompt) {
 }
 
 practice_feedback_page <-  function(page_number, correct_answer_number, image_dir) {
-  # if (page_number > 1 &&  answer == training_answers[page_number - 1]) correct <- "CORRECT"
-  #   feedback <- psychTestR::i18n(correct)
   # TODO
-  conditional(function(state, ...) get_local("correct_answer", state) == training_answers[page_number],
+  psychTestR::conditional(function(state, ...) get_local("correct_answer", state) == training_answers[page_number],
     feedback_page_with_img(sprintf("training%d", page_number), paste(psychTestR::i18n(sprintf("PRACTICE_FEEDBACK%d", page_number), html = TRUE), "Correct!"), page_number, correct_answer_number, image_dir)
   )
   # conditional(function(state, ...) get_local("correct_answer", state) != training_answers[page_number],

@@ -49,17 +49,15 @@ show_item <- function(image_dir) {
 
 get_prompt <- function(item_number, num_items_in_test) {
   shiny::div(
-    shiny::h4(
-      psychTestR::i18n(
-        "PAGE_HEADER",
-        sub = list(num_question = item_number,
-                   test_length = if (is.null(num_items_in_test))
-                     "?" else
-                       num_items_in_test)),
-      style = "text_align: center;"
-    ),
+    paste(psychTestR::i18n(
+      "PAGE_HEADER",
+      sub = list(num_question = item_number,
+                 test_length = if (is.null(num_items_in_test))
+                   "?" else
+                     num_items_in_test)), paste0("(", item_number, "/", num_items_in_test, ")")),
     shiny::p(
       psychTestR::i18n("PROMPT"),
-      style = "margin-left:20%; margin-right:20%; text-align:justify;")
-    )
+      style = "font-weight: normal;"),
+    style = "text-align: center; margin-bottom: 20px;"
+  )
 }
