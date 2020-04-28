@@ -31,7 +31,7 @@ debug_locally <- !grepl("shiny-server", getwd())
 #' @param ... Further arguments to be passed to \code{\link{MIQ}()}.
 #' @export
 MIQ_standalone  <- function(title = NULL,
-                            num_items = 16L,
+                            num_items = 5,
                             with_feedback = FALSE,
                             take_training = TRUE,
                             with_welcome = TRUE,

@@ -50,7 +50,7 @@
 #' We recommend leaving this option disabled.
 #' @param dict The psychTestR dictionary used for internationalisation.
 #' @export
-MIQ <- function(num_items = 15L,
+MIQ <- function(num_items = 5,
                 take_training = FALSE,
                 with_welcome = FALSE,
                 label = "MIQ",
