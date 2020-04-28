@@ -28,16 +28,17 @@ show_item <- function(image_dir) {
   function(item, ...) {
     stopifnot(is(item, "item"), nrow(item) == 1L)
 
-    item_number <- psychTestRCAT::get_item_number(item)
-    num_items_in_test <- psychTestRCAT::get_num_items_in_test(item)
     item_bank <- MIQ::MIQ_item_bank
+    item_number <- psychTestRCAT::get_item_number(item)
+    item_name <- item_bank[item_bank$id == item_number, "name"]
+    num_items <- psychTestRCAT::get_num_items_in_test(item)
 
     MIQ_item(
-      label = paste0("q", item_number),
+      label = paste0("q", item_number, "_", item_name),
       page_number = item_number,
       item_name = item_bank[item_bank$id == item_number, "name"],
       answer = item$answer,
-      prompt = get_prompt(item_number, num_items_in_test),
+      prompt = get_prompt(item_number, num_items),
       image_dir = image_dir,
       save_answer = TRUE,
       get_answer = NULL,
@@ -47,14 +48,14 @@ show_item <- function(image_dir) {
   }
 }
 
-get_prompt <- function(item_number, num_items_in_test) {
+get_prompt <- function(item_number, num_items) {
   shiny::div(
     paste(psychTestR::i18n(
       "PAGE_HEADER",
       sub = list(num_question = item_number,
-                 test_length = if (is.null(num_items_in_test))
+                 num_items = if (is.null(num_items))
                    "?" else
-                     num_items_in_test)), paste0("(", item_number, "/", num_items_in_test, ")")),
+                     num_items)), paste0("(", item_number, "/", num_items, ")")),
     shiny::p(
       psychTestR::i18n("PROMPT"),
       style = "font-weight: normal;"),

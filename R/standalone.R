@@ -31,20 +31,19 @@ debug_locally <- !grepl("shiny-server", getwd())
 #' @param ... Further arguments to be passed to \code{\link{MIQ}()}.
 #' @export
 MIQ_standalone  <- function(title = NULL,
-                           num_items = 16L,
-                           with_feedback = FALSE,
-                           take_training = TRUE,
-                           with_welcome = TRUE,
-                           admin_password = "conifer",
-                           researcher_email = "longgold@gold.uc.ak",
-                           languages = c("EN", "DE"),
-                           dict = MIQ::MIQ_dict,
-                           validate_id = "auto",
+                            num_items = 16L,
+                            with_feedback = FALSE,
+                            take_training = TRUE,
+                            with_welcome = TRUE,
+                            admin_password = "conifer",
+                            researcher_email = "longgold@gold.uc.ak",
+                            languages = c("EN", "DE"),
+                            dict = MIQ::MIQ_dict,
+                            validate_id = "auto",
                            ...) {
   feedback <- NULL
   if(with_feedback) {
-    #feedback <- MIQ_feedback_with_score()
-    feedback <- MIQ_feedback_with_graph()
+    feedback <- MIQ_feedback_with_score()
   }
   elts <- c(
     psychTestR::new_timeline(
@@ -53,15 +52,12 @@ MIQ_standalone  <- function(title = NULL,
                            validate = validate_id),
       dict = dict
     ),
-    #register_participant(),
     MIQ(num_items = num_items,
         take_training = take_training,
         with_welcome =  with_welcome,
         feedback = feedback,
         ...),
-    #psychTestRCAT::cat.feedback.graph("MIQ"),
     psychTestR::elt_save_results_to_disk(complete = TRUE),
-    #upload_results(F),
     psychTestR::new_timeline(
       psychTestR::final_page(shiny::p(
         psychTestR::i18n("RESULTS_SAVED"),

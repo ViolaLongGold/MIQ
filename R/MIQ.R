@@ -71,8 +71,6 @@ MIQ <- function(num_items = 15L,
               psychTestR::is.test_element(feedback) ||
               is.null(feedback))
 
-  image_dir <- "http://52.17.155.167/concerto4/media/stimuli/MyIQ_v1"
-
   psychTestR::join(
     if (take_training) psychTestR::new_timeline(instructions(image_dir), dict = dict),
     psychTestR::new_timeline(
