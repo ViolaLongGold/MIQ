@@ -6,7 +6,7 @@
 \usage{
 MIQ_standalone(
   title = NULL,
-  num_items = 16L,
+  num_items = 5,
   with_feedback = FALSE,
   take_training = TRUE,
   with_welcome = TRUE,

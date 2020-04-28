@@ -5,7 +5,7 @@
 \title{MIQ}
 \usage{
 MIQ(
-  num_items = 15L,
+  num_items = 5,
   take_training = FALSE,
   with_welcome = FALSE,
   label = "MIQ",
