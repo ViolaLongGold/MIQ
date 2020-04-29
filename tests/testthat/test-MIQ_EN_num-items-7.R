@@ -29,15 +29,7 @@ app$expect_ui_text("Your results have been saved. You may now close the browser 
 
 results <- app$get_results() %>% as.list()
 
-expect_equal(names(results), c("results", "MIQ"))
-expect_equal(
-  results[["results"]],
-  list(
-    training1 = 8,
-    training2 = 3
-  )
-)
-
+expect_equal(names(results), c("MIQ"))
 expect_equal(
   results[["MIQ"]][1:7],
   list(
