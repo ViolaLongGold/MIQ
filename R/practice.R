@@ -33,5 +33,15 @@ practice_feedback_page <- function(page_number, answer) {
       psychTestR::i18n("INCORRECT")
     }
   prompt <- paste(psychTestR::i18n(sprintf("PRACTICE_FEEDBACK%d", page_number), html = TRUE), correctness_text)
-  practice_feedback_page_with_img(label, prompt, page_number, training_answers[page_number], image_dir)
+  item_name <- paste0("x", page_number)
+  button_text_key <- if (page_number == 1) { "NEXT_PRACTICE_ITEM" } else { "CONTINUE_TO_MAIN" }
+
+  ui <- shiny::div(
+    shiny::div(prompt, style = "font-weight: bold;"),
+    shiny::tags$img(src = paste0(image_dir, sprintf("/%s/m_%s.png", item_name, item_name))),
+    shiny::tags$img(src = paste0(image_dir, sprintf("/%s/r%d_%s.png", item_name, training_answers[page_number], item_name)), style = "margin-bottom: 15px; margin-top: 10px;"),
+    shiny::p(psychTestR::trigger_button("next", psychTestR::i18n(button_text_key)))
+  )
+
+  psychTestR::page(ui = ui, label = label)
 }

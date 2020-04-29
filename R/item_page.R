@@ -96,35 +96,6 @@ get_audio_element <- function(url,
   audio
 }
 
-practice_feedback_page_with_img <- function(label,
-                                   prompt,
-                                   page_number,
-                                   correct_answer_number,
-                                   image_dir,
-                                   save_answer = TRUE,
-                                   get_answer = NULL,
-                                   hide_response_ui = FALSE,
-                                   response_ui_id = "response_ui",
-                                   on_complete = NULL,
-                                   admin_ui = NULL) {
-  stopifnot(purrr::is_scalar_character(label))
-  get_answer = function(state, ...) psychTestR::get_local("correct_answer", state)
-  item_name <- paste0("x", page_number)
-  button_text_key <- if (page_number == 1) { "NEXT_PRACTICE_ITEM" } else { "CONTINUE_TO_MAIN" }
-
-  ui <- shiny::div(
-    shiny::div(prompt, style = "font-weight: bold;"),
-    shiny::tags$img(src = paste0(image_dir, sprintf("/%s/m_%s.png", item_name, item_name))),
-    shiny::tags$img(src = paste0(image_dir, sprintf("/%s/r%d_%s.png", item_name, correct_answer_number, item_name)), style = "margin-bottom: 15px; margin-top: 10px;"),
-    shiny::p(psychTestR::trigger_button("next", psychTestR::i18n(button_text_key)))
-  )
-
-  psychTestR::page(ui = ui, label = label, get_answer = get_answer, save_answer = save_answer,
-       on_complete = on_complete, final = FALSE,
-       admin_ui = admin_ui)
-}
-
-
 NAFC_page_with_img <- function(label,
                                prompt,
                                subprompt,
@@ -229,9 +200,7 @@ MIQ_item <- function(label,
                        choices = choices,
                        save_answer = save_answer,
                        get_answer = get_answer,
-                       on_complete = function(answer, state, ...) {
-                         set_local("correct_answer", answer, state)
-                       })
+                       on_complete = NULL)
   } else {
     psychTestR::one_button_page(page_prompt, button_text = "add stuff")
   }
