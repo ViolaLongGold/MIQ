@@ -34,7 +34,7 @@ show_item <- function(image_dir) {
     num_items <- psychTestRCAT::get_num_items_in_test(item)
 
     MIQ_item(
-      label = paste0("q", item_number, "_", item_name),
+      label = paste0("q", item_number),
       page_number = item_number,
       item_name = item_bank[item_bank$id == item_number, "name"],
       answer = item$answer,

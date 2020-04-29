@@ -40,7 +40,7 @@ MIQ_standalone  <- function(title = NULL,
                             languages = c("EN", "DE"),
                             dict = MIQ::MIQ_dict,
                             validate_id = "auto",
-                           ...) {
+                            ...) {
   feedback <- NULL
   if(with_feedback) {
     feedback <- MIQ_feedback_with_score()
@@ -66,7 +66,7 @@ MIQ_standalone  <- function(title = NULL,
   )
   key = NULL
   if(is.null(title)){
-    #extract title as named vector from dictionary
+    # extract title as named vector from dictionary
     title <-
       MIQ::MIQ_dict  %>%
       as.data.frame() %>%
