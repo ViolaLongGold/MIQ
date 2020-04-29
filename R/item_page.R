@@ -112,11 +112,13 @@ NAFC_page_with_img <- function(label,
   stopifnot(purrr::is_scalar_character(label))
   audio_ui <- get_audio_ui("audio_url", wait = T, loop = F)
   style <- NULL
+  img_id <- sprintf("m_%s", item_name)
   if (hide_response_ui) style <- "visibility:hidden"
   ui <- shiny::div(
     shiny::div(prompt, style = "font-weight: bold;"),
     tagify(subprompt),
-    shiny::tags$img(src = paste0(image_dir, sprintf("/%s/m_%s.png", item_name, item_name)), style = "margin-top: 10px;"),
+    shiny::tags$img(id = img_id, src = paste0(image_dir, sprintf("/%s/%s.png", item_name, img_id)), style = "margin-top: 10px;"),
+    shiny::tags$script(shiny::HTML(sprintf("window.setTimeout(\"document.getElementById('%s').style.visibility='hidden';\", 120000)", img_id))),
     shiny::div(choices, style = style, id = response_ui_id)
     )
   if (is.null(get_answer)) {
