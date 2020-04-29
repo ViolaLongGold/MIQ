@@ -11,10 +11,7 @@ instructions <- function(image_dir) {
     }),
     info_page("INTRO1"),
     info_page("INTRO2"),
-    practice_page(1, image_dir),
-    practice_feedback_page(1, 8, image_dir),
-    practice_page(2, image_dir),
-    practice_feedback_page(2, 3, image_dir),
+    practice(),
     psychTestR::one_button_page(
       psychTestR::i18n("INTRO_MAIN"),
       button_text = psychTestR::i18n("CONTINUE")

@@ -96,7 +96,7 @@ get_audio_element <- function(url,
   audio
 }
 
-feedback_page_with_img <- function(label,
+practice_feedback_page_with_img <- function(label,
                                    prompt,
                                    page_number,
                                    correct_answer_number,
@@ -145,7 +145,7 @@ NAFC_page_with_img <- function(label,
   ui <- shiny::div(
     shiny::div(prompt, style = "font-weight: bold;"),
     tagify(subprompt),
-    shiny::tags$img(src = paste0(image_dir, sprintf("/%s/m_%s.png", item_name, item_name))),
+    shiny::tags$img(src = paste0(image_dir, sprintf("/%s/m_%s.png", item_name, item_name)), style = "margin-top: 10px;"),
     shiny::div(choices, style = style, id = response_ui_id)
     )
   if (is.null(get_answer)) {
@@ -213,7 +213,7 @@ MIQ_item <- function(label,
 
   page_prompt <- shiny::div(prompt)
   page_subprompt <- shiny::div(subprompt)
-  printf("MIQ item_called for page_number %d and item_name %s", page_number, item_name)
+  # printf("MIQ item_called for page_number %d and item_name %s", page_number, item_name)
 
   image_numbers <- c(1, 2, 3, 4, 5, 6, 7, 8)
 
