@@ -39,11 +39,11 @@ expect_equal(
 expect_equal(
   results[["MIQ"]][1:5],
   list(
-    "q1_b4" = 1,
-    "q2_b3" = 2,
-    "q3_d1" = 3,
-    "q4_a6" = 4,
-    "q5_d6" = 5
+    "q1" = 1,
+    "q2" = 2,
+    "q3" = 3,
+    "q4" = 4,
+    "q5" = 5
   )
 )
 
