@@ -53,6 +53,7 @@
 MIQ <- function(num_items = 5,
                 take_training = FALSE,
                 with_welcome = FALSE,
+                with_finish = FALSE,
                 label = "MIQ",
                 feedback = MIQ_feedback_with_score(),
                 next_item.criterion = "bOpt",
@@ -84,6 +85,13 @@ MIQ <- function(num_items = 5,
                 final_ability.estimator = final_ability.estimator,
                 constrain_answers = constrain_answers),
       dict = dict),
+    if (with_finish)
+      psychTestR::new_timeline(
+        psychTestR::one_button_page(
+          body = psychTestR::i18n("CONGRATULATIONS"),
+          button_text = psychTestR::i18n("CONTINUE")
+        ), dict = dict),
+
     feedback
   )
 }
