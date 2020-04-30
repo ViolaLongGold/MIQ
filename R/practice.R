@@ -38,8 +38,8 @@ practice_feedback_page <- function(page_number, answer) {
 
   ui <- shiny::div(
     shiny::div(prompt, style = "font-weight: bold;"),
-    shiny::tags$img(src = paste0(image_dir, sprintf("/%s/m_%s.png", item_name, item_name))),
-    shiny::div(shiny::tags$img(src = paste0(image_dir, sprintf("/%s/r%d_%s.png", item_name, training_answers[page_number], item_name)), style = "margin-bottom: 15px; margin-top: 10px;")),
+    shiny::tags$img(src = paste0(image_dir, sprintf("/%s/m_%s.png", item_name, item_name)), style = "margin-top: 10px; width: 468px;"),
+    shiny::div(shiny::tags$img(src = paste0(image_dir, sprintf("/%s/r%d_%s.png", item_name, training_answers[page_number], item_name)), style = "margin-bottom: 15px; margin-top: 10px; width: 106px; height: 73px;")),
     shiny::p(psychTestR::trigger_button("next", psychTestR::i18n(button_text_key)))
   )
 

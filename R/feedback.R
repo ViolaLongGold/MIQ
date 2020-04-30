@@ -68,13 +68,9 @@ MIQ_feedback_with_graph <- function(dict = MIQ::MIQ_dict) {
       psychTestR::reactive_page(function(state, ...) {
         results <- psychTestR::get_results(state = state, complete = TRUE, add_session_info = FALSE)
         results <- attr(as.list(results)$MIQ$ability, "metadata")$results
-        #print(results)
-        #print(nrow(results))
-
         perc_correct <- (results$ability_WL[nrow(results)] + 2)/4
         sum_score <- sum(results$score)
         num_question <- nrow(results)
-        #perc_correct <- sum_score/num_question
         #printf("Sum scores: %d, total items: %d perc_correct: %.2f", sum_score, num_question, perc_correct)
         text_finish <- psychTestR::i18n("COMPLETED",
                                         html = TRUE,
