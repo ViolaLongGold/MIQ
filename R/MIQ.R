@@ -12,7 +12,7 @@
 #' @param take_training (Logical scalar) Whether to include the training phase.
 #' Defaults to FALSE.
 #' @param with_welcome (Logical scalar) Whether to display a welcome page.
-#' Defaults to FALSE.
+#' Defaults to TRUE
 #' @param label (Character scalar) Label to give the MIQ results in the output file.
 #' @param feedback (Function) Defines the feedback to give the participant
 #' at the end of the test.
@@ -52,7 +52,7 @@
 #' @export
 MIQ <- function(num_items = 5,
                 take_training = FALSE,
-                with_welcome = FALSE,
+                with_welcome = TRUE,
                 with_finish = FALSE,
                 label = "MIQ",
                 feedback = MIQ_feedback_with_score(),
@@ -73,6 +73,7 @@ MIQ <- function(num_items = 5,
               is.null(feedback))
 
   psychTestR::join(
+    if (with_welcome) welcome_page(),
     if (take_training) psychTestR::new_timeline(instructions(image_dir), dict = dict),
     psychTestR::new_timeline(
       main_test(label = label,
