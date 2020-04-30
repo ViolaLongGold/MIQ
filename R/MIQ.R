@@ -13,6 +13,8 @@
 #' Defaults to FALSE.
 #' @param with_welcome (Logical scalar) Whether to display a welcome page.
 #' Defaults to TRUE
+#' @param with_finish (Logical scalar) Whether to display a finish page.
+#' Defaults to FALSE
 #' @param label (Character scalar) Label to give the MIQ results in the output file.
 #' @param feedback (Function) Defines the feedback to give the participant
 #' at the end of the test.

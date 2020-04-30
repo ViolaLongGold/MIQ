@@ -3,7 +3,7 @@ library(MIQ)
 library(testthat)
 
 dir <-
-  system.file("tests/MIQ_EN_num-items-7", package = "MIQ", mustWork = TRUE)
+  system.file("tests/MIQ_EN_num-items-7_desc", package = "MIQ", mustWork = TRUE)
 app <- AppTester$new(dir)
 
 app$expect_ui_text("Please enter your particpant ID. Continue")

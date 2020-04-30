@@ -29,6 +29,9 @@ Defaults to FALSE.}
 \item{with_welcome}{(Logical scalar) Whether to display a welcome page.
 Defaults to TRUE}
 
+\item{with_finish}{(Logical scalar) Whether to display a finish page.
+Defaults to FALSE}
+
 \item{label}{(Character scalar) Label to give the MIQ results in the output file.}
 
 \item{feedback}{(Function) Defines the feedback to give the participant
