@@ -7,7 +7,8 @@
 MIQ(
   num_items = 5,
   take_training = FALSE,
-  with_welcome = FALSE,
+  with_welcome = TRUE,
+  with_finish = FALSE,
   label = "MIQ",
   feedback = MIQ_feedback_with_score(),
   next_item.criterion = "bOpt",
@@ -26,7 +27,7 @@ MIQ(
 Defaults to FALSE.}
 
 \item{with_welcome}{(Logical scalar) Whether to display a welcome page.
-Defaults to FALSE.}
+Defaults to TRUE}
 
 \item{label}{(Character scalar) Label to give the MIQ results in the output file.}
 
