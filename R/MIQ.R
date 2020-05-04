@@ -64,6 +64,7 @@ MIQ <- function(num_items = 5,
                 next_item.prior_par = c(0, 1),
                 final_ability.estimator = "WL",
                 constrain_answers = FALSE,
+                eligible_first_items = c(3),
                 dict = MIQ::MIQ_dict) {
 
   stopifnot(purrr::is_scalar_character(label),
@@ -86,7 +87,8 @@ MIQ <- function(num_items = 5,
                 next_item.prior_dist = next_item.prior_dist,
                 next_item.prior_par = next_item.prior_par,
                 final_ability.estimator = final_ability.estimator,
-                constrain_answers = constrain_answers),
+                constrain_answers = constrain_answers,
+                eligible_first_items = eligible_first_items),
       dict = dict),
     if (with_finish)
       psychTestR::new_timeline(

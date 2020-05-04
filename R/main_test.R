@@ -3,10 +3,11 @@ main_test <- function(label,
                       num_items,
                       next_item.criterion,
                       next_item.estimator,
-                      next_item.prior_dist = next_item.prior_dist,
-                      next_item.prior_par = next_item.prior_par,
+                      next_item.prior_dist,
+                      next_item.prior_par,
                       final_ability.estimator,
-                      constrain_answers) {
+                      constrain_answers,
+                      eligible_first_items) {
   item_bank <- MIQ::MIQ_item_bank
 
   psychTestRCAT::adapt_test(
@@ -20,6 +21,7 @@ main_test <- function(label,
                       next_item.prior_par = next_item.prior_par,
                       final_ability.estimator = final_ability.estimator,
                       constrain_answers = constrain_answers,
+                      eligible_first_items = eligible_first_items,
                       item_bank = item_bank)
   )
 }
