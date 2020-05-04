@@ -11,12 +11,13 @@ MIQ(
   with_finish = FALSE,
   label = "MIQ",
   feedback = MIQ_feedback_with_score(),
-  next_item.criterion = "bOpt",
+  next_item.criterion = "MFI",
   next_item.estimator = "BM",
   next_item.prior_dist = "norm",
   next_item.prior_par = c(0, 1),
   final_ability.estimator = "WL",
   constrain_answers = FALSE,
+  eligible_first_items = c(3),
   dict = MIQ::MIQ_dict
 )
 }
@@ -40,7 +41,7 @@ at the end of the test.}
 \item{next_item.criterion}{(Character scalar)
 Criterion for selecting successive items in the adaptive test.
 See the \code{criterion} argument in \code{\link[catR]{nextItem}} for possible values.
-Defaults to \code{"bOpt"}.}
+Defaults to \code{"MFI"}.}
 
 \item{next_item.estimator}{(Character scalar)
 Ability estimation method used for selecting successive items in the adaptive test.
@@ -61,7 +62,7 @@ See the \code{priorDist} argument in \code{\link[catR]{thetaEst}} for possible v
 Parameters for the prior distribution;
 see the \code{priorPar} argument in \code{\link[catR]{thetaEst}} for details.
 Ignored if \code{next_item.estimator} is not a Bayesian method.
-The dfeault is \code{c(0, 1)}.}
+The default is \code{c(0, 1)}.}
 
 \item{final_ability.estimator}{Estimation method used for the final ability estimate.
 See the \code{method} argument in \code{\link[catR]{thetaEst}} for possible values.
@@ -73,6 +74,12 @@ by the \code{next_item.prior_dist} and \code{next_item.prior_par} arguments.}
 If \code{TRUE}, then item selection will be constrained so that the
 correct answers are distributed as evenly as possible over the course of the test.
 We recommend leaving this option disabled.}
+
+\item{eligible_first_items}{(Character scalar)
+(NULL or integerish vector) If not NULL, lists the eligible items for the first item
+in the test, where each item is identified by its 1-indexed row number in item_bank
+(see adapt_test). For example, c(2, 3, 4) means that the first item will be drawn
+from rows 2, 3, 4 of the item bank). Default is \code{c(3)} (the third item).}
 
 \item{dict}{The psychTestR dictionary used for internationalisation.}
 }
