@@ -1,4 +1,4 @@
 library(psychTestR)
 library(MIQ)
 
-MIQ_standalone(languages = "EN")
+MIQ_standalone(languages = "DE")

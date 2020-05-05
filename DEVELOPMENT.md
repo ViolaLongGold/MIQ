@@ -8,4 +8,4 @@
 
 * In miq
   ** source("data_raw/MIQ_dict.R")
-  ** clean && rebuild
+  ** Clean and Rebuild

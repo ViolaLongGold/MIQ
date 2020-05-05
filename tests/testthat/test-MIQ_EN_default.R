@@ -3,7 +3,7 @@ library(MIQ)
 library(testthat)
 
 dir <-
-  system.file("tests/MIQ_EN_num-items-default", package = "MIQ", mustWork = TRUE)
+  system.file("tests/MIQ_EN_default", package = "MIQ", mustWork = TRUE)
 app <- AppTester$new(dir)
 
 app$expect_ui_text("Please enter your particpant ID. Continue")
@@ -27,7 +27,7 @@ app$click("answer3")
 app$click("answer4")
 app$click("answer5")
 
-app$expect_ui_text("Your results have been saved. You may now close the browser tab.")
+app$expect_ui_text("Your results have been saved. You can close the browser window now.")
 
 results <- app$get_results() %>% as.list()
 

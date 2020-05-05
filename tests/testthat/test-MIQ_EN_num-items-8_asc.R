@@ -3,7 +3,7 @@ library(MIQ)
 library(testthat)
 
 dir <-
-  system.file("tests/MIQ_EN_num-items-8_asc", package = "MIQ", mustWork = TRUE)
+  system.file("tests/MIQ_EN_num-items-8", package = "MIQ", mustWork = TRUE)
 app <- AppTester$new(dir)
 
 app$expect_ui_text("Please enter your particpant ID. Continue")
@@ -30,7 +30,7 @@ app$click("answer6")
 app$click("answer7")
 app$click("answer8")
 
-app$expect_ui_text("Your results have been saved. You may now close the browser tab.")
+app$expect_ui_text("Your results have been saved. You can close the browser window now.")
 
 results <- app$get_results() %>% as.list()
 
@@ -49,8 +49,6 @@ expect_equal(
   )
 )
 
-# expect_equal(results[["MIQ"]][9][["ability"]][1], -2.4391771)
-# expect_equal(results[["MIQ"]][10][["ability_sem"]][1], 1.52087095)
 expect_equal(results[["MIQ"]][11][["num_items"]], 8)
 
 app$stop()
