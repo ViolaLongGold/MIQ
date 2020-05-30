@@ -49,7 +49,7 @@ library(MIQ)
 MIQ_demo()
 
 # Run a demo test, skipping the training phase, and only asking 5 questions, as well a changinge the language
-MIQ_demo(num_items = 5, take_training = FALSE, language = "DE")
+MIQ_demo(num_items = 5, take_training = FALSE, language = "de")
 ```
 
 ### Testing a participant
@@ -81,7 +81,7 @@ see http://psychtestr.com/.
 
 The MIQ currently supports English (EN) and  German (DE).
 You can select one of these languages by passing a language code as 
-an argument to `MIQ_standalone()`, e.g. `MIQ_standalone(languages = "DE")`,
+an argument to `MIQ_standalone()`, e.g. `MIQ_standalone(languages = "de")`,
 or alternatively by passing it as a URL parameter to the test browser,
 eg. http://127.0.0.1:4412/?language=DE (note that the `p_id` argument must be empty).
 

@@ -11,7 +11,7 @@ MIQ_demo(
   admin_password = "demo",
   researcher_email = "longgold@gold.uc.ak",
   dict = MIQ::MIQ_dict,
-  language = "EN",
+  language = "en",
   ...
 )
 }
@@ -36,7 +36,7 @@ the email address of this package's developer.}
 \item{dict}{The psychTestR dictionary used for internationalisation.}
 
 \item{language}{The language you want to run your demo in.
-Possible languages include English (\code{"EN"}) and German (\code{"DE"}).
+Possible languages include English (\code{"en"}) and German (\code{"de"}).
 The first language is selected by default}
 
 \item{...}{Further arguments to be passed to \code{\link{MIQ}()}.}

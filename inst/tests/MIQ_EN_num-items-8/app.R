@@ -1,4 +1,4 @@
 library(psychTestR)
 library(MIQ)
 
-MIQ_standalone(languages = "EN", num_items = 8)
+MIQ_standalone(languages = "en", num_items = 8)
