@@ -82,10 +82,9 @@ MIQ <- function(num_items = 5,
 
   psychTestR::join(
     if (with_welcome) welcome_page(),
-    if (take_training) psychTestR::new_timeline(instructions(image_dir), dict = dict),
+    if (take_training) psychTestR::new_timeline(instructions(), dict = dict),
     psychTestR::new_timeline(
       main_test(label = label,
-                image_dir = image_dir,
                 num_items = num_items,
                 next_item.criterion = next_item.criterion,
                 next_item.estimator = next_item.estimator,

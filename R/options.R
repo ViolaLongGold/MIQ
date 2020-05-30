@@ -17,5 +17,3 @@ MIQ_options <- function(next_item.criterion,
     avoid_duplicates = NULL
   )
 }
-
-image_dir <- "http://52.17.155.167/concerto4/media/stimuli/MyIQ_v1"

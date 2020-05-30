@@ -3,7 +3,7 @@ info_page <- function(id, style = "text-align: center; margin-left: 10%; margin-
                               button_text = psychTestR::i18n("CONTINUE"))
 }
 
-instructions <- function(image_dir) {
+instructions <- function() {
   c(
     psychTestR::code_block(function(state, ...) {
       psychTestR::set_local("do_intro", TRUE, state)

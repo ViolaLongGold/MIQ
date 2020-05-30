@@ -31,7 +31,6 @@ NAFC_page_with_img <- function(label,
                                subprompt,
                                page_number,
                                item_name,
-                               image_dir,
                                choices,
                                save_answer = TRUE,
                                get_answer = NULL,
@@ -46,7 +45,7 @@ NAFC_page_with_img <- function(label,
   ui <- shiny::div(
     shiny::div(prompt, style = "font-weight: bold;"),
     tagify(subprompt),
-    shiny::tags$img(id = img_id, src = paste0(image_dir, sprintf("/%s/%s.png", item_name, img_id)), style = "margin-top: 10px; width: 468px;"),
+    shiny::tags$img(id = img_id, src = sprintf("www/images/%s/%s.png", item_name, img_id), style = "margin-top: 10px; width: 468px;"),
     shiny::tags$script(shiny::HTML(sprintf("window.setTimeout(\"document.getElementById('%s').style.visibility='hidden';\", 120000)", img_id))),
     shiny::div(choices, style = style, id = response_ui_id)
     )
@@ -62,13 +61,12 @@ NAFC_page_with_img <- function(label,
 get_answer_button <- function(page_number,
                               item_name,
                               image_number,
-                              image_dir,
                               width = 106,
                               height = 73,
-                              index){
-
-  img_src <- file.path(image_dir, sprintf("/%s/r%d_%s.png", item_name, image_number, item_name))
+                              index) {
+  img_src <- sprintf("www/images/%s/r%d_%s.png", item_name, image_number, item_name)
   # printf("get_answer_button img_src: %s", img_src)
+
   trigger_img_button(inputId = sprintf("answer%d", index),
                      img_src = img_src,
                      width = width,
@@ -79,7 +77,6 @@ get_answer_button <- function(page_number,
 get_answer_block<-function(page_number,
                            item_name,
                            image_numbers,
-                           image_dir,
                            width = 550,
                            height = 100,
                            ncols = 4,
@@ -88,7 +85,7 @@ get_answer_block<-function(page_number,
   rows <- list()
   for (i in seq_len(n)) {
     #width_factor <- nchar(image_numbers[i]) / 8
-    button <- get_answer_button(page_number, item_name, image_numbers[i], width = 106, height = 73, index = i, image_dir = image_dir)
+    button <- get_answer_button(page_number, item_name, image_numbers[i], width = 106, height = 73, index = i)
     rows[[i]] <- button
   }
 
@@ -106,7 +103,6 @@ MIQ_item <- function(label,
                      answer,
                      prompt = "",
                      subprompt = "",
-                     image_dir = "",
                      save_answer = TRUE,
                      get_answer = NULL,
                      on_complete = NULL,
@@ -120,14 +116,13 @@ MIQ_item <- function(label,
   image_numbers <- c(1, 2, 3, 4, 5, 6, 7, 8)
 
   if(!instruction_page){
-    choices <- get_answer_block(page_number, item_name, image_numbers, image_dir = image_dir)
+    choices <- get_answer_block(page_number, item_name, image_numbers)
 
     NAFC_page_with_img(label = label,
                        prompt = page_prompt,
                        subprompt = page_subprompt,
                        page_number = page_number,
                        item_name = item_name,
-                       image_dir = image_dir,
                        choices = choices,
                        save_answer = save_answer,
                        get_answer = get_answer,

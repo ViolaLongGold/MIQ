@@ -1,5 +1,4 @@
 main_test <- function(label,
-                      image_dir,
                       num_items,
                       next_item.criterion,
                       next_item.estimator,
@@ -13,7 +12,7 @@ main_test <- function(label,
   psychTestRCAT::adapt_test(
     label = label,
     item_bank = item_bank,
-    show_item = show_item(image_dir),
+    show_item = show_item(),
     stopping_rule = psychTestRCAT::stopping_rule.num_items(n = num_items),
     opt = MIQ_options(next_item.criterion = next_item.criterion,
                       next_item.estimator = next_item.estimator,
@@ -26,7 +25,7 @@ main_test <- function(label,
   )
 }
 
-show_item <- function(image_dir) {
+show_item <- function() {
   function(item, ...) {
     stopifnot(is(item, "item"), nrow(item) == 1L)
 
@@ -34,7 +33,7 @@ show_item <- function(image_dir) {
     item_number <- psychTestRCAT::get_item_number(item)
     item_name <- item_bank[item_bank$id == item$id, "name"]
     num_items <- psychTestRCAT::get_num_items_in_test(item)
-    messagef("Showing item %s (correct: %d)", item_name, item$answer)
+    # messagef("Showing item %s (correct: %d)", item_name, item$answer)
 
     MIQ_item(
       label = paste0("q", item_number),
@@ -42,7 +41,6 @@ show_item <- function(image_dir) {
       item_name = item_bank[item_bank$id == item$id, "name"],
       answer = item$answer,
       prompt = get_prompt(item_number, num_items),
-      image_dir = image_dir,
       save_answer = TRUE,
       get_answer = NULL,
       on_complete = NULL,
