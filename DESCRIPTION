@@ -28,4 +28,7 @@ Suggests:
     covr,
     devtools,
     testthat
+Remotes:
+    pmcharrison/psychTestR,
+    pmcharrison/psychTestRCAT
 RoxygenNote: 7.1.0
