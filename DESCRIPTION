@@ -1,9 +1,9 @@
 Package: MIQ
 Type: Package
 Title: My IQ Test (MIQ)
-Version: 1.0.0
+Version: 1.0.1
 Author: Klaus Frieler, Frank Höger
-Maintainer: Klaus Frieler <kf@omniversum.de>
+Maintainer: Frank Höger <fmh@mirsem.org>
 Description: Implementation of the My IQ Test.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -11,22 +11,21 @@ LazyData: true
 Depends:
     R (>= 3.6.0),
 Imports:
-    dplyr (>= 0.8.5),
+    dplyr (>= 1.0.0),
+    ggplot2(>= 3.3.1),
     htmltools (>= 0.4.0),
-    methods (>= 3.6.1),
+    methods (>= 3.6.3),
+    plotly (>= 4.9.2),
     psychTestRCAT (>= 1.6.0),
-    psychTestR (>= 2.19.0),
+    psychTestR (>= 2.19.1),
     purrr (>= 0.3.4),
     shiny (>= 1.4.0),
-    stats (>= 3.6.1),
-    tibble (>= 3.0.0),
+    stats (>= 3.6.3),
+    tibble (>= 3.0.1),
     tidyverse (>= 1.3.0)
 Suggests:
     codetools,
     covr,
     devtools,
-    ggplot2,
-    plotly,
     testthat
-Remotes: fmhoeger/psychTestR, pmcharrison/psychTestRCAT
 RoxygenNote: 7.1.0
