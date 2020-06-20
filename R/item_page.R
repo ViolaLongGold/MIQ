@@ -45,7 +45,7 @@ NAFC_page_with_img <- function(label,
   ui <- shiny::div(
     shiny::div(prompt, style = "font-weight: bold;"),
     tagify(subprompt),
-    shiny::tags$img(id = img_id, src = sprintf("www/images/%s/%s.png", item_name, img_id), style = "margin-top: 10px; width: 468px;"),
+    shiny::tags$img(id = img_id, src = sprintf("www/images/%s/%s.png", item_name, img_id), style = "margin-top: 10px; max-width: 468px; width: 100%; height: auto;"),
     shiny::tags$script(shiny::HTML(sprintf("window.setTimeout(\"document.getElementById('%s').style.visibility='hidden';\", 120000)", img_id))),
     shiny::div(choices, style = style, id = response_ui_id)
     )
