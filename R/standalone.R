@@ -76,7 +76,6 @@ MIQ_standalone  <- function(title = NULL,
       unlist()
   }
 
-  shiny::addResourcePath("www", system.file("www", package = "MIQ"))
   psychTestR::make_test(
     elts,
     opt = psychTestR::test_options(title = title,
