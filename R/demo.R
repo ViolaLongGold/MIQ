@@ -5,7 +5,7 @@
 #' @param num_items (Integer scalar) Number of items in the test.
 #' @param take_training (Boolean scalar) Defines whether instructions and training are included.
 #' Defaults to TRUE.
-#' @param feedback (Function) Defines the feedback to give the participant
+#' @param feedback_page (Function) Defines the feedback to give the participant
 #' at the end of the test. Defaults to a graph-based feedback page.
 #' @param admin_password (Scalar character) Password for accessing the admin panel.
 #' Defaults to \code{"demo"}.
