@@ -3,7 +3,7 @@
 <!-- badges: start -->
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://tidyverse.org/lifecycle/#maturing)
 [![Travis build status](https://travis-ci.org/fmhoeger/MIQ.svg?branch=master)](https://travis-ci.org/fmhoeger/MIQ)
-[![Coverage status](https://codecov.io/gh/fmhoeger/MIQ/branch/development/graph/badge.svg)](https://codecov.io/github/fmhoeger/MIQ?branch=development)
+[![Coverage status](https://codecov.io/gh/fmhoeger/MIQ/branch/master/graph/badge.svg)](https://codecov.io/github/fmhoeger/MIQ?branch=master)
 <!-- badges: end -->
 
 The MIQ is an adaptive test for visual pattern recognition.
