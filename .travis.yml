@@ -8,19 +8,16 @@ os:
   - linux
 notifications:
   email:
-    - frank@mirsem.org
-    - viola.pausch@posteo.de
-    - kilian.sander@aol.com
-    - kgf@omniversum.de
+    - fmhoeger@mirsem.org
 
 before_deploy: Rscript -e 'remotes::install_cran("pkgdown"); remotes::install_github("rstudio/rmarkdown"); install.packages("shinytest"); shinytest::installDependencies()'
 
-after_success:
-  - Rscript -e 'covr::codecov()'
-  - pip install --user codecov
-  - codecov --file coverage/lcov.info --disable search
+r_packages:
+  - covr
+  - devtools
 
-#deploy:
-#  provider: script
-#  script: Rscript -e 'pkgdown::deploy_site_github()'
-#  skip_cleanup: true
+r_github_packages:
+  - fmhoeger/MIQ
+
+after_success:
+  - Rscript -e 'library(covr);codecov()'
