@@ -5,8 +5,8 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' MIQ_demo(feedback = MIQ_feedback_with_score())}
-MIQ_feedback_with_score <- function(dict = MIQ::MIQ_dict) {
+#' MIQ_demo(feedback = feedback_with_score())}
+feedback_with_score <- function(dict = MIQ::MIQ_dict) {
   psychTestR::new_timeline(
     c(
       psychTestR::reactive_page(function(state, ...) {
@@ -33,7 +33,7 @@ MIQ_feedback_with_score <- function(dict = MIQ::MIQ_dict) {
 
 }
 
-MIQ_feedback_graph_normal_curve <- function(perc_correct, x_min = 40, x_max = 160, x_mean = 100, x_sd = 15) {
+feedback_graph_normal_curve <- function(perc_correct, x_min = 40, x_max = 160, x_mean = 100, x_sd = 15) {
   x = NULL
   q <-
     ggplot2::ggplot(data.frame(x = c(x_min, x_max)), ggplot2::aes(x)) +
@@ -61,8 +61,8 @@ MIQ_feedback_graph_normal_curve <- function(perc_correct, x_min = 40, x_max = 16
 #' @export
 #' @examples
 #' \dontrun{
-#' MIQ_demo(feedback = MIQ_feedback_with_score())}
-MIQ_feedback_with_graph <- function(dict = MIQ::MIQ_dict) {
+#' MIQ_demo(feedback = feedback_with_score())}
+feedback_with_graph <- function(dict = MIQ::MIQ_dict) {
   psychTestR::new_timeline(
     c(
       psychTestR::reactive_page(function(state, ...) {
@@ -75,7 +75,7 @@ MIQ_feedback_with_graph <- function(dict = MIQ::MIQ_dict) {
         text_finish <- psychTestR::i18n("COMPLETED",
                                         html = TRUE,
                                         sub = list(num_question = num_question, num_correct = sum_score))
-        norm_plot <- MIQ_feedback_graph_normal_curve(perc_correct)
+        norm_plot <- feedback_graph_normal_curve(perc_correct)
         psychTestR::page(
           ui = shiny::div(
             shiny::p(text_finish),

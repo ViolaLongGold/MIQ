@@ -22,7 +22,7 @@
 #' @export
 MIQ_demo <- function(num_items = 3L,
                      take_training = TRUE,
-                     feedback = MIQ::MIQ_feedback_with_score(),
+                     feedback_page = feedback_with_graph(),
                      admin_password = "demo",
                      researcher_email = "longgold@gold.uc.ak",
                      dict = MIQ::MIQ_dict,
@@ -33,11 +33,11 @@ MIQ_demo <- function(num_items = 3L,
       body = psychTestR::i18n("INTRO1"),
       button_text = psychTestR::i18n("CONTINUE")
     ), dict = dict),
-    MIQ::MIQ(num_items = num_items,
-             take_training = take_training,
-             feedback = feedback,
-             dict = dict,
-             ...),
+    MIQ(num_items = num_items,
+        take_training = take_training,
+        feedback_page = feedback_page,
+        dict = dict,
+        ...),
     psychTestR::new_timeline(
       psychTestR::final_page(psychTestR::i18n("CLOSE_BROWSER")),
       dict = dict

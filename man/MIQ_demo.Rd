@@ -7,7 +7,7 @@
 MIQ_demo(
   num_items = 3L,
   take_training = TRUE,
-  feedback = MIQ::MIQ_feedback_with_score(),
+  feedback_page = feedback_with_graph(),
   admin_password = "demo",
   researcher_email = "longgold@gold.uc.ak",
   dict = MIQ::MIQ_dict,
@@ -20,9 +20,6 @@ MIQ_demo(
 
 \item{take_training}{(Boolean scalar) Defines whether instructions and training are included.
 Defaults to TRUE.}
-
-\item{feedback}{(Function) Defines the feedback to give the participant
-at the end of the test. Defaults to a graph-based feedback page.}
 
 \item{admin_password}{(Scalar character) Password for accessing the admin panel.
 Defaults to \code{"demo"}.}
@@ -40,6 +37,9 @@ Possible languages include English (\code{"en"}) and German (\code{"de"}).
 The first language is selected by default}
 
 \item{...}{Further arguments to be passed to \code{\link{MIQ}()}.}
+
+\item{feedback}{(Function) Defines the feedback to give the participant
+at the end of the test. Defaults to a graph-based feedback page.}
 }
 \description{
 This function launches a demo for the MIQ.

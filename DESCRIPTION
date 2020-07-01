@@ -1,7 +1,7 @@
 Package: MIQ
 Type: Package
 Title: My IQ Test (MIQ)
-Version: 1.0.5
+Version: 1.0.6
 Author: Klaus Frieler, Frank Höger
 Maintainer: Frank Höger <fmh@mirsem.org>
 Description: Implementation of the My IQ Test.
@@ -12,7 +12,7 @@ Depends:
     R (>= 3.6.0),
 Imports:
     dplyr (>= 1.0.0),
-    ggplot2(>= 3.3.1),
+    ggplot2(>= 3.3.2),
     htmltools (>= 0.4.0),
     methods,
     plotly (>= 4.9.2),
@@ -30,4 +30,4 @@ Suggests:
 Remotes:
     pmcharrison/psychTestR,
     pmcharrison/psychTestRCAT
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1

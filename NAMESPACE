@@ -2,10 +2,10 @@
 
 export(MIQ)
 export(MIQ_demo)
-export(MIQ_feedback_with_graph)
-export(MIQ_feedback_with_score)
 export(MIQ_languages)
 export(MIQ_standalone)
+export(feedback_with_graph)
+export(feedback_with_score)
 importFrom(dplyr,"%>%")
 importFrom(dplyr,"filter")
 importFrom(dplyr,"mutate")

@@ -1,10 +1,9 @@
 library(psychTestR)
-library(MIQ)
-library(testthat)
 
-dir <-
-  system.file("tests/MIQ_DE_default", package = "MIQ", mustWork = TRUE)
-app <- AppTester$new(dir)
+
+context("default")
+
+app <- AppTester$new("apps/MIQ_de_default")
 
 app$expect_ui_text("Bitte gib Deine ID ein Weiter")
 app$set_inputs(p_id = "abcde")

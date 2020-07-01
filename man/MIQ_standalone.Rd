@@ -7,9 +7,9 @@
 MIQ_standalone(
   title = NULL,
   num_items = 5,
-  with_feedback = FALSE,
-  take_training = TRUE,
   with_welcome = TRUE,
+  take_training = TRUE,
+  feedback_page = NULL,
   admin_password = "conifer",
   researcher_email = "longgold@gold.uc.ak",
   languages = c("en", "de"),
@@ -19,38 +19,41 @@ MIQ_standalone(
 )
 }
 \arguments{
-\item{title}{(Scalar character) Title to display during testing.}
+\item{title}{(Character scalar) Title to display during testing.}
 
-\item{num_items}{(Scalar integer) Number of items to be adminstered.}
-
-\item{with_feedback}{(Scalar boolean) Indicates if performance feedback will be given at the end of the test. Defaults to  FALSE}
-
-\item{take_training}{(Boolean scalar) Defines whether instructions and training are included.
-Defaults to TRUE.}
+\item{num_items}{(Integer scalar) Number of items to be adminstered.}
 
 \item{with_welcome}{(Logical scalar) Whether to display a welcome page.
 Defaults to TRUE.}
 
-\item{admin_password}{(Scalar character) Password for accessing the admin panel.}
+\item{take_training}{(Logical scalar) Defines whether instructions and training are included.
+Defaults to TRUE.}
 
-\item{researcher_email}{(Scalar character)
+\item{feedback_page}{(Function) Defines a feedback page function for displaying
+the results to the participant at the end of the test. Defaults to NULL.
+Possible feedback page functions include \code{"feedback_with_score()"}, and
+\code{"feedback_with_graph()"}.}
+
+\item{admin_password}{(Character scalar) Password for accessing the admin panel.}
+
+\item{researcher_email}{(Character scalar)
 If not \code{NULL}, this researcher's email address is displayed
 at the bottom of the screen so that online participants can ask for help.}
 
 \item{languages}{(Character vector)
 Determines the languages available to participants.
-Possible languages include English (\code{"en"}),
-and German (\code{"de"}).
+Possible languages include English (\code{"en"}), and German (\code{"de"}).
 The first language is selected by default}
 
-\item{dict}{The psychTestR dictionary used for internationalisation.}
+\item{dict}{(i18n_dict) The psychTestR dictionary used for internationalisation.}
 
-\item{validate_id}{(Character scalar or closure) Function for validating IDs or string "auto" for default validation
-which means ID should consist only of  alphanumeric characters.}
+\item{validate_id}{(Character scalar or closure) Function for validating IDs
+or string "auto" for default validation which means ID should consist only of
+alphanumeric characters.}
 
-\item{...}{Further arguments to be passed to \code{\link{MIQ}()}.}
+\item{...}{Further arguments to be passed to \code{\link{MIQ_standalone}()}.}
 }
 \description{
-This function launches a standalone testing session for the MIQ
+This function launches a standalone testing session for MIQ.
 This can be used for data collection, either in the laboratory or online.
 }

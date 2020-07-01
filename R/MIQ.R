@@ -1,23 +1,24 @@
 #' MIQ
 #'
-#' This function defines a MIQ  module for incorporation into a
+#' This function defines a MIQ module for incorporation into a
 #' psychTestR timeline.
-#' Use this function if you want to include the MIQ in a
-#' battery of other tests, or if you want to add custom psychTestR
-#' pages to your test timeline.
+#' Use this function if you want to include MIQ in a battery of other tests, or
+#' if you want to add custom psychTestR pages to your test timeline.
 #' For demoing the MIQ, consider using \code{\link{MIQ_demo}()}.
-#' For a standalone implementation of the MIQ,
-#' consider using \code{\link{MIQ_standalone}()}.
+#' For a standalone implementation of the MIQ, consider using
+#' \code{\link{MIQ_standalone}()}.
+#' @param label (Character scalar) Label to give the MIQ results in the output file.
 #' @param num_items (Integer scalar) Number of items in the test.
-#' @param take_training (Logical scalar) Whether to include the training phase.
-#' Defaults to FALSE.
 #' @param with_welcome (Logical scalar) Whether to display a welcome page.
 #' Defaults to TRUE
+#' @param take_training (Logical scalar) Whether to include the training phase.
+#' Defaults to FALSE.
+#' @param feedback_page (Function) Defines a feedback page function for displaying
+#' the results to the participant at the end of the test. Defaults to NULL.
+#' Possible feedback page functions include \code{"feedback_with_score()"}, and
+#' \code{"feedback_with_graph()"}.
 #' @param with_finish (Logical scalar) Whether to display a finish page.
 #' Defaults to FALSE
-#' @param label (Character scalar) Label to give the MIQ results in the output file.
-#' @param feedback (Function) Defines the feedback to give the participant
-#' at the end of the test.
 #' @param next_item.criterion (Character scalar)
 #' Criterion for selecting successive items in the adaptive test.
 #' See the \code{criterion} argument in \code{\link[catR]{nextItem}} for possible values.
@@ -55,14 +56,14 @@
 #' in the test, where each item is identified by its 1-indexed row number in item_bank
 #' (see adapt_test). For example, c(2, 3, 4) means that the first item will be drawn
 #' from rows 2, 3, 4 of the item bank). Default is \code{c(3)} (the third item).
-#' @param dict The psychTestR dictionary used for internationalisation.
+#' @param dict (i18n_dict) The psychTestR dictionary used for internationalisation.
 #' @export
-MIQ <- function(num_items = 5,
-                take_training = FALSE,
+MIQ <- function(label = "MIQ",
+                num_items = 5,
                 with_welcome = TRUE,
+                take_training = FALSE,
+                feedback_page = NULL,
                 with_finish = FALSE,
-                label = "MIQ",
-                feedback = MIQ_feedback_with_score(),
                 next_item.criterion = "MFI",
                 next_item.estimator = "BM",
                 next_item.prior_dist = "norm",
@@ -75,10 +76,10 @@ MIQ <- function(num_items = 5,
   stopifnot(purrr::is_scalar_character(label),
             purrr::is_scalar_integer(num_items) || purrr::is_scalar_double(num_items),
             purrr::is_scalar_logical(take_training),
-            psychTestR::is.timeline(feedback) ||
-              is.list(feedback) ||
-              psychTestR::is.test_element(feedback) ||
-              is.null(feedback))
+            psychTestR::is.timeline(feedback_page) ||
+              is.list(feedback_page) ||
+              psychTestR::is.test_element(feedback_page) ||
+              is.null(feedback_page))
 
   shiny::addResourcePath("www", system.file("www", package = "MIQ"))
 
@@ -103,6 +104,6 @@ MIQ <- function(num_items = 5,
           button_text = psychTestR::i18n("CONTINUE")
         ), dict = dict),
 
-    feedback
+    feedback_page
   )
 }
