@@ -33,7 +33,6 @@ show_item <- function() {
     item_number <- psychTestRCAT::get_item_number(item)
     item_name <- item_bank[item_bank$id == item$id, "name"]
     num_items <- psychTestRCAT::get_num_items_in_test(item)
-    # messagef("Showing item %s (correct: %d)", item_name, item$answer)
 
     MIQ_item(
       label = paste0("q", item_number),

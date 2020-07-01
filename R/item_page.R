@@ -111,7 +111,6 @@ MIQ_item <- function(label,
 
   page_prompt <- shiny::div(prompt)
   page_subprompt <- shiny::div(subprompt)
-  # printf("MIQ item_called for page_number %d and item_name %s", page_number, item_name)
 
   image_numbers <- c(1, 2, 3, 4, 5, 6, 7, 8)
 
