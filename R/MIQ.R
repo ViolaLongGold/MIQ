@@ -80,7 +80,7 @@ MIQ <- function(num_items = 5,
               psychTestR::is.test_element(feedback) ||
               is.null(feedback))
 
-  shiny::addResourcePath("www", system.file("www", package = "MIQ"))
+  shiny::addResourcePath("www_MIQ", system.file("www", package = "MIQ"))
 
   psychTestR::join(
     if (with_welcome) welcome_page(),
