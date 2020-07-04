@@ -45,7 +45,7 @@ NAFC_page_with_img <- function(label,
   ui <- shiny::div(
     shiny::div(prompt, style = "font-weight: bold;"),
     tagify(subprompt),
-    shiny::tags$img(id = img_id, src = sprintf("www/images/%s/%s.png", item_name, img_id), style = "margin-top: 10px; max-width: 468px; width: 100%; height: auto;"),
+    shiny::tags$img(id = img_id, src = sprintf("www_MIQ/images/%s/%s.png", item_name, img_id), style = "margin-top: 10px; max-width: 468px; width: 100%; height: auto;"),
     shiny::tags$script(shiny::HTML(sprintf("window.setTimeout(\"document.getElementById('%s').style.visibility='hidden';\", 120000)", img_id))),
     shiny::div(choices, style = style, id = response_ui_id)
     )
@@ -64,7 +64,7 @@ get_answer_button <- function(page_number,
                               width = 106,
                               height = 73,
                               index) {
-  img_src <- sprintf("www/images/%s/r%d_%s.png", item_name, image_number, item_name)
+  img_src <- sprintf("www_MIQ/images/%s/r%d_%s.png", item_name, image_number, item_name)
   # printf("get_answer_button img_src: %s", img_src)
 
   trigger_img_button(inputId = sprintf("answer%d", index),
