@@ -16,6 +16,9 @@ NULL
 #' @importFrom stats "dnorm"
 NULL
 
+#' @importFrom stats "setNames"
+NULL
+
 #' @importFrom tibble "tibble"
 NULL
 

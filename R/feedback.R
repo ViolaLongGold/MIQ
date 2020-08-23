@@ -42,7 +42,7 @@ feedback_graph_normal_curve <- function(perc_correct, x_min = 40, x_max = 160, x
   q <- q + ggplot2::theme_bw()
   #q <- q + scale_y_continuous(labels = scales::percent, name="Frequency (%)")
   #q <- q + ggplot2::scale_y_continuous(labels = NULL)
-  x_axis_lab <- sprintf(" %s %s", psychTestR::i18n("TESTNAME"), psychTestR::i18n("VALUE"))
+  x_axis_lab <- sprintf(" %s %s", psychTestR::i18n("TITLE"), psychTestR::i18n("VALUE"))
   title <- psychTestR::i18n("SCORE_TEMPLATE")
   fake_IQ <- (x_max - x_min) * perc_correct + x_min
   main_title <- sprintf("%s: %.0f", title, round(fake_IQ, digits = 0))

@@ -1,10 +1,3 @@
-library(shiny)
-library(tidyverse)
-
-options(shiny.error = browser)
-debug_locally <- !grepl("shiny-server", getwd())
-
-
 #' Standalone MIQ
 #'
 #' This function launches a standalone testing session for MIQ.
@@ -65,17 +58,13 @@ MIQ_standalone  <- function(title = NULL,
         psychTestR::i18n("CLOSE_BROWSER"))
       ), dict = dict)
   )
-  key = NULL
-  if(is.null(title)){
-    # extract title as named vector from dictionary
-    title <-
-      MIQ::MIQ_dict  %>%
-      as.data.frame() %>%
-      dplyr::filter(key == "TESTNAME") %>%
-      dplyr::select(-key) %>%
-      as.list() %>%
-      unlist()
-  }
+
+  title <-
+    unlist(setNames(
+      purrr::map(MIQ::MIQ_languages(), function(x)
+        MIQ::MIQ_dict$translate("TITLE", x)),
+      MIQ::MIQ_languages()
+    ))
 
   psychTestR::make_test(
     elts,
