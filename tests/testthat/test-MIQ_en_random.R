@@ -3,9 +3,15 @@ library(testthat)
 
 context("default")
 
-dir <- "C:/Users/new/Documents/LongGold/Projects/MIQ/tests/testthat/apps/MIQ_en_default"
+w_dir <- getwd()
 
-app <- AppTester$new(dir)
+if (substr(w_dir, nchar(w_dir)-7, nchar(w_dir)) != "testthat") {
+  dir_app <- "tests/testthat/apps/MIQ_en_default"
+} else {
+  dir_app <-  "apps/MIQ_en_default"
+}
+
+app <<- AppTester$new(dir_app)
 
 number_items <- 5 #number of items
 
@@ -55,7 +61,7 @@ expect_equal(names(results), c("MIQ"))
 expect_equal(results[["MIQ"]][8][["num_items"]], number_items)
 
 if (TRUE) {
-  # export Results
+  # Export results
   MIQ_ability_sem <<- results[["MIQ"]][["ability_sem"]]
   MDT_ability <<- results[["MIQ"]][["ability"]]
 
